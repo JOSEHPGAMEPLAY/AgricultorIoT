@@ -18,7 +18,6 @@ public class UsuarioController {
 
     @GetMapping("/buscarTodos")
     public ResponseEntity<?> buscarTodos() {
-        System.out.println("Buscando todos los usuarios...");
         return usuarioService.buscarTodos();
     }
 

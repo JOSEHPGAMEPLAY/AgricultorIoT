@@ -10,6 +10,6 @@ public class UsuarioDTO {
 
     private String apellido;
 
-    private int edad;
+    private Integer edad;
 
 }

@@ -22,4 +22,10 @@ public class Usuario {
     @Field(name = "edad")
     private int edad;
 
+    @Field(name = "email")
+    private String email;
+
+    @Field(name = "password")
+    private String password;
+
 }
