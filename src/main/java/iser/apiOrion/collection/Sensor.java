@@ -14,6 +14,7 @@ import java.util.Date;
 public class Sensor {
 
     @Id
+    @JsonIgnore
     private String id;
 
     @Field(name = "temperatura")
@@ -23,6 +24,7 @@ public class Sensor {
     private Double humedad;
 
     @Field(name = "fecha")
+    @JsonIgnore
     private Date fecha;
 
 }

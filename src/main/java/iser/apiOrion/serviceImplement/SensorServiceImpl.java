@@ -21,6 +21,9 @@ public class SensorServiceImpl implements SensorService {
     public ResponseEntity<?> buscarTodos() {
         try {
             List<Sensor> sensors = sensorRepository.findAll();
+            if (!sensors.isEmpty()) {
+                sensors.forEach(Sensor::getFecha);
+            }
             return ResponseEntity.ok(sensors);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
