@@ -3,7 +3,7 @@ package iser.apiOrion.service;
 import iser.apiOrion.collection.Sensor;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
+import java.util.Date;
 
 public interface SensorService {
 
@@ -16,4 +16,6 @@ public interface SensorService {
     ResponseEntity<?> actualizarSensor(Sensor sensor);
 
     ResponseEntity<?> borrarSensor(String id);
+
+    ResponseEntity<?> rangofecha(Date fechainicio, Date fechafin);
 }

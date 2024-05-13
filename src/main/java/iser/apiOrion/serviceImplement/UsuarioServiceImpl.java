@@ -6,6 +6,8 @@ import iser.apiOrion.repository.UsuarioRepository;
 import iser.apiOrion.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,9 +17,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
     @Override
     public ResponseEntity<?> insertar(Usuario usuario) {
         try {
+            String password =  passwordEncoder().encode(usuario.getPassword());
+            usuario.setPassword(password);
             usuarioRepository.save(usuario);
             return ResponseEntity.ok().build();
         }catch(Exception e){
