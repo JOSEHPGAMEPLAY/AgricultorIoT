@@ -21,9 +21,6 @@ public class SensorServiceImpl implements SensorService {
     public ResponseEntity<?> buscarTodos() {
         try {
             List<Sensor> sensors = sensorRepository.findAll();
-            if (!sensors.isEmpty()) {
-                sensors.forEach(Sensor::getFecha);
-            }
             return ResponseEntity.ok(sensors);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -45,7 +42,6 @@ public class SensorServiceImpl implements SensorService {
     @Override
     public ResponseEntity<?> crearSensor(Sensor sensor) {
         try {
-            sensor.setFecha(new Date());
             sensorRepository.save(sensor);
             return ResponseEntity.ok(sensor);
         } catch (Exception e) {
@@ -80,9 +76,6 @@ public class SensorServiceImpl implements SensorService {
     public ResponseEntity<?> rangofecha(Date fechainicio, Date fechafin) {
         try {
             List<Sensor> sensors = sensorRepository.findByFechaBetween(fechainicio, fechafin);
-            if (!sensors.isEmpty()) {
-                sensors.forEach(Sensor::getFecha);
-            }
             return ResponseEntity.ok(sensors);
         }catch (Exception e){
             System.out.println("Error: "+e.getMessage());

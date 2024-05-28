@@ -1,7 +1,6 @@
 package iser.apiOrion.serviceImplement;
 
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import iser.apiOrion.auth.serviceImpl.JwtTokenProvider;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.repository.UsuarioRepository;
@@ -19,8 +18,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public ResponseEntity<?> insertar(Usuario usuario) {
         try {
-            String password = JwtTokenProvider.passwordEncoder(usuario.getPassword());
-            usuario.setPassword(password);
+            String password = JwtTokenProvider.passwordEncoder(usuario.getClave());
+            usuario.setClave(password);
             usuarioRepository.save(usuario);
             return ResponseEntity.ok().build();
         }catch(Exception e){
