@@ -1,30 +1,28 @@
 package iser.apiOrion.collection;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
-
 @Data
-@Document(collection = "Sensor")
+@Document(collection = "sensor")
 public class Sensor {
 
     @Id
-    @JsonIgnore
     private String id;
 
-    @Field(name = "temperatura")
-    private Double temperatura;
+    @Field(name = "id_hibernadero")
+    private String idHibernadero;
 
-    @Field(name = "humedad")
-    private Double humedad;
+    @Field(name = "nombre")
+    private String nombre;
 
-    @Field(name = "fecha")
-    @JsonIgnore
-    private Date fecha;
+    @Field(name = "descripcion")
+    private String descripcion;
+
+    @Field(name = "config")
+    private boolean config;
 
 }

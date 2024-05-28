@@ -32,11 +32,6 @@ public class SensorController {
         return sensorService.crearSensor(sensor);
     }
 
-    @PutMapping("/actualizarSensor")
-    public ResponseEntity<?> actualizarSensor(Sensor sensor){
-        return sensorService.actualizarSensor(sensor);
-    }
-
     @DeleteMapping("/borrarSensor")
     public ResponseEntity<?> borrarSensor(String id){
         return sensorService.borrarSensor(id);
@@ -47,8 +42,6 @@ public class SensorController {
                                           @RequestParam("fechafinal") String fechaFinal) throws ParseException {
 
         //String fechaString = "2024-05-09";
-        System.out.println("Fecha inicial: " + fechaIncial);
-        System.out.println("Fecha final: " + fechaFinal);
 
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 

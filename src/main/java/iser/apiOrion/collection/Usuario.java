@@ -13,19 +13,16 @@ public class Usuario {
     @Id
     private String id;
 
-    @Field(name = "nombre")
-    private String nombre;
+    @Field(name = "usuario")
+    private String usuario;
 
-    @Field(name = "apellido")
-    private String apellido;
-
-    @Field(name = "edad")
-    private int edad;
+    @Field(name = "nombres")
+    private String nombres;
 
     @Field(name = "email")
     private String email;
 
-    @Field(name = "password")
-    private String password;
+    @Field(name = "clave")
+    private String clave;
 
 }
