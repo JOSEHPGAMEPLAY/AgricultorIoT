@@ -1,4 +1,4 @@
 package iser.apiOrion.service;
 
-public interface DatosServices {
+public interface DatosService {
 }
