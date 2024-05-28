@@ -71,15 +71,4 @@ public class SensorServiceImpl implements SensorService {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
-
-    @Override
-    public ResponseEntity<?> rangofecha(Date fechainicio, Date fechafin) {
-        try {
-            List<Sensor> sensors = sensorRepository.findByFechaBetween(fechainicio, fechafin);
-            return ResponseEntity.ok(sensors);
-        }catch (Exception e){
-            System.out.println("Error: "+e.getMessage());
-            return ResponseEntity.badRequest().body("Error: "+e.getMessage());
-        }
-    }
 }

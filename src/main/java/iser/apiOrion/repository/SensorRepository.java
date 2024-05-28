@@ -7,7 +7,4 @@ import java.util.Date;
 import java.util.List;
 
 public interface SensorRepository extends MongoRepository<Sensor, String> {
-
-    //Consultar por rango de fechas
-    List<Sensor> findByFechaBetween(Date fecha1, Date fecha2);
 }

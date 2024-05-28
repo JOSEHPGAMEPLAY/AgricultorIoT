@@ -17,5 +17,5 @@ public interface SensorService {
 
     ResponseEntity<?> borrarSensor(String id);
 
-    ResponseEntity<?> rangofecha(Date fechainicio, Date fechafin);
+
 }

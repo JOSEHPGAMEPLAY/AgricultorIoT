@@ -46,4 +46,19 @@ public class HibernaderoServiceImpl implements HibernaderoService {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @Override
+    public ResponseEntity<?> insertar(Object object) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> actualizar(Object object) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<?> eliminar(String id) {
+        return null;
+    }
 }

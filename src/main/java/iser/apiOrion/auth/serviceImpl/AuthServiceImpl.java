@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
             if (usuario.isEmpty()) {
                 return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
             }
-            if (!JwtTokenProvider.matchPassword(loginDto.getClave(), usuario.get().getPassword())) {
+            if (!JwtTokenProvider.matchPassword(loginDto.getClave(), usuario.get().getClave())) {
                 return new ResponseEntity<>("clave incorrecta", HttpStatus.BAD_REQUEST);
             }
             Map<String, String> response = new HashMap<>();
@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
                 if (usuario1.isPresent()) {
                     return new ResponseEntity<>("Usuario ya registrado", HttpStatus.BAD_REQUEST);
                 }
-                usuario.setPassword(JwtTokenProvider.passwordEncoder(usuario1.get().getPassword()));
+                usuario.setClave(JwtTokenProvider.passwordEncoder(usuario1.get().getClave()));
                 usuarioRepository.save(usuario);
                 return new ResponseEntity<>("Usuario registrado", HttpStatus.OK);
             } else {

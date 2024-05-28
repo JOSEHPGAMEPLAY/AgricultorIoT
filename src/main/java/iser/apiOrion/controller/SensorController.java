@@ -37,17 +37,4 @@ public class SensorController {
         return sensorService.borrarSensor(id);
     }
 
-    @GetMapping("/rangoFechas")
-    public ResponseEntity<?> rangoFechas(@RequestParam("fechaInicial") String fechaIncial,
-                                          @RequestParam("fechafinal") String fechaFinal) throws ParseException {
-
-        //String fechaString = "2024-05-09";
-
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date fechainicio = formato.parse(fechaIncial);
-        Date fechafinal = formato.parse(fechaFinal);
-        return sensorService.rangofecha(fechainicio, fechafinal);
-    }
-
 }
