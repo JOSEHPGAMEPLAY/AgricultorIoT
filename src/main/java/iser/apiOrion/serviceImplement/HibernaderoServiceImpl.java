@@ -49,16 +49,36 @@ public class HibernaderoServiceImpl implements HibernaderoService {
 
     @Override
     public ResponseEntity<?> insertar(Object object) {
-        return null;
+        try {
+            Hibernadero hibernadero = (Hibernadero) object;
+            hibernaderoRepository.save(hibernadero);
+            return ResponseEntity.ok().body(hibernadero);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @Override
     public ResponseEntity<?> actualizar(Object object) {
-        return null;
+        try {
+            Hibernadero hibernadero = (Hibernadero) object;
+            hibernaderoRepository.save(hibernadero);
+            return ResponseEntity.ok().body(hibernadero);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @Override
     public ResponseEntity<?> eliminar(String id) {
-        return null;
+        try {
+            hibernaderoRepository.deleteById(id);
+            return ResponseEntity.ok().body("Hibernadero eliminado");
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

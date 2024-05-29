@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "hibernadero")
 public class Hibernadero {
 
-    @Field(name = "id")
+    @Field(name = "_id")
     private String id;
 
     @Field(name = "imagen")

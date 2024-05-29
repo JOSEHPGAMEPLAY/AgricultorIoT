@@ -1,6 +1,7 @@
 package iser.apiOrion.controller;
 
 
+import iser.apiOrion.collection.Hibernadero;
 import iser.apiOrion.service.HibernaderoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,12 @@ public class HIbernaderoController {
     }
 
     @PostMapping("/insertar")
-    public ResponseEntity<?> insertar(Object object) {
+    public ResponseEntity<?> insertar(Hibernadero object) {
         return hibernaderoService.insertar(object);
     }
 
     @PutMapping("/actualizar")
-    public ResponseEntity<?> actualizar(Object object) {
+    public ResponseEntity<?> actualizar(Hibernadero object) {
         return hibernaderoService.actualizar(object);
     }
 
