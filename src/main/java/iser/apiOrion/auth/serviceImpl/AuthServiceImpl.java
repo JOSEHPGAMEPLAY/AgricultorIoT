@@ -31,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response) {
         try {
             Optional<Usuario> usuario = usuarioRepository.findByUsuario(loginDto.getUsuario());
+            System.out.println("usuario: " + usuario);
             if (usuario.isEmpty()) {
                 return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
             }
@@ -43,6 +44,8 @@ public class AuthServiceImpl implements AuthService {
             response.addHeader("Access-Control-Expose-Headers", "Authorization");
             return ResponseEntity.ok().build();
         } catch (Exception e) {
+            System.out.println("ERROR_MESSAGE: " + e.getMessage());
+            System.out.println("ERROR_MESSAGE: " + e.getStackTrace());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
