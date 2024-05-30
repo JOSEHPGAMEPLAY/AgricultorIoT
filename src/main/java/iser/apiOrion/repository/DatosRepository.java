@@ -9,6 +9,5 @@ import java.util.List;
 
 public interface DatosRepository extends MongoRepository<Datos, String> {
 
-    //List<Sensor> findByFechaBetween(Date fecha1, Date fecha2);
-    List<Datos> findByFechaBetween(Date fecha1, Date fecha2);
+    List<Datos> findByIdSensorAndFechaBetween(String idSensor, Date fechainicio, Date fechafin);
 }

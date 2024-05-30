@@ -71,4 +71,15 @@ public class SensorServiceImpl implements SensorService {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+
+    @Override
+    public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
+        try {
+            List<Sensor> sensors = sensorRepository.findByidHibernadero(idHibernadero);
+            return ResponseEntity.ok(sensors);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 }

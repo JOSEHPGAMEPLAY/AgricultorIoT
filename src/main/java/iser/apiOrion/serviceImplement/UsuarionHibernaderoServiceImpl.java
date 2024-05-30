@@ -44,4 +44,63 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @Override
+    public ResponseEntity<?> buscarPorId(String id) {
+        try {
+            UsuarioHibernadero usuarioHibernadero = usuarioHibernaderoRepository.findById(id).get();
+            return ResponseEntity.ok(usuarioHibernadero);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero) {
+        try {
+            UsuarioHibernadero usuarioHibernadero = new UsuarioHibernadero();
+            usuarioHibernadero.setIdUsuario(idUsuario);
+            usuarioHibernadero.setIdHibernadero(idHibernadero);
+            usuarioHibernaderoRepository.save(usuarioHibernadero);
+            return ResponseEntity.ok(usuarioHibernadero);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> borrarUsuarioHibernadero(String id) {
+        try {
+            usuarioHibernaderoRepository.deleteById(id);
+            return ResponseEntity.ok("Usuario Hibernadero borrado");
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> buscarPorUsuario(String idUsuario) {
+        try {
+            List<UsuarioHibernadero> usuarioHibernaderos = usuarioHibernaderoRepository.findByIdUsuario(idUsuario);
+            return ResponseEntity.ok(usuarioHibernaderos);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
+        try {
+            List<UsuarioHibernadero> usuarioHibernaderos = usuarioHibernaderoRepository.findByIdHibernadero(idHibernadero);
+            return ResponseEntity.ok(usuarioHibernaderos);
+        } catch (Exception e) {
+            System.out.println("Error: "+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

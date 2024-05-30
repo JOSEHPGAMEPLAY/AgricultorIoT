@@ -9,4 +9,5 @@ public interface UsuarioHibernaderoRepository extends MongoRepository<UsuarioHib
 
     List<UsuarioHibernadero> findByIdUsuario(String idUsuario);
 
+    List<UsuarioHibernadero> findByIdHibernadero(String idHibernadero);
 }
