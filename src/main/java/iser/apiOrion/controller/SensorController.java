@@ -37,7 +37,6 @@ public class SensorController {
         return sensorService.borrarSensor(id);
     }
 
-    //consultar sensor por hibernadero
     @GetMapping("/obtenerPorHibernadero")
     public ResponseEntity<?> obtenerPorHibernadero(String idHibernadero){
         return sensorService.buscarPorHibernadero(idHibernadero);

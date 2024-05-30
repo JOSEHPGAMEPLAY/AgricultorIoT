@@ -14,10 +14,19 @@ import java.util.List;
 @Service
 public class DatosServiceImpl implements DatosService {
 
+    /**
+     * Repositorio de datos
+     */
     @Autowired
     DatosRepository datosRepository;
 
-
+    /**
+     * Metodo que permite obtener los datos de un sensor en un rango de fechas
+     * @param fechainicio fecha de inicio
+     * @param fechafin fecha final
+     * @param idSensor id del sensor
+     * @return lista de datos
+     */
     @Override
     public ResponseEntity<?> rangofecha(Date fechainicio, Date fechafin, String idSensor) {
         try {
@@ -29,6 +38,13 @@ public class DatosServiceImpl implements DatosService {
         }
     }
 
+    /**
+     * Metodo que permite insertar un dato
+     * @param idSensor id del sensor
+     * @param valor valor del sensor
+     * @param fecha fecha del dato
+     * @return dato insertado
+     */
     @Override
     public ResponseEntity<?> insertar(String idSensor, String valor, Date fecha) {
         try {

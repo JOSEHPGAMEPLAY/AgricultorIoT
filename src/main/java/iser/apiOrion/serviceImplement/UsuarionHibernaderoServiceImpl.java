@@ -15,12 +15,23 @@ import java.util.List;
 public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService {
 
 
+    /**
+     * Repositorio de usuario hibernadero
+     */
     @Autowired
     UsuarioHibernaderoRepository usuarioHibernaderoRepository;
 
+    /**
+     * Repositorio de hibernadero
+     */
     @Autowired
     HibernaderoRepository hibernaderoRepository;
 
+    /**
+     * Metodo que permite obtener todos los hibernaderos de un usuario
+     * @param id id del usuario
+     * @return lista de hibernaderos
+     */
     @Override
     public ResponseEntity<?> buscarHibernaderosUsuario(String id) {
         try {
@@ -45,6 +56,11 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
         }
     }
 
+    /**
+     * Metodo que permite obtener todos los usuarios de un hibernadero
+     * @param id id del hibernadero
+     * @return lista de usuarios
+     */
     @Override
     public ResponseEntity<?> buscarPorId(String id) {
         try {
@@ -56,6 +72,12 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
         }
     }
 
+    /**
+     * Metodo que permite crear un usuario hibernadero
+     * @param idUsuario id del usuario
+     * @param idHibernadero id del hibernadero
+     * @return usuario hibernadero creado
+     */
     @Override
     public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero) {
         try {
@@ -70,6 +92,11 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
         }
     }
 
+    /**
+     * Metodo que permite borrar un usuario hibernadero
+     * @param id id del usuario hibernadero
+     * @return mensaje de confirmacion
+     */
     @Override
     public ResponseEntity<?> borrarUsuarioHibernadero(String id) {
         try {
@@ -81,6 +108,11 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
         }
     }
 
+    /**
+     * Metodo que permite obtener los hibernaderos de un usuario
+     * @param idUsuario id del usuario
+     * @return lista de hibernaderos
+     */
     @Override
     public ResponseEntity<?> buscarPorUsuario(String idUsuario) {
         try {
@@ -92,6 +124,11 @@ public class UsuarionHibernaderoServiceImpl implements UsuarioHibernaderoService
         }
     }
 
+    /**
+     * Metodo que permite obtener los usuarios de un hibernadero
+     * @param idHibernadero id del hibernadero
+     * @return lista de usuarios
+     */
     @Override
     public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
         try {

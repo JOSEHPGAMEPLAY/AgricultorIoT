@@ -12,16 +12,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class ApiOrionApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-
-        System.out.println("clave ==> "+JwtTokenProvider.passwordEncoder("123456"));
-        System.out.println("tru ? ==> "+JwtTokenProvider.matchPassword("123456","$2a$12$79w.JmrXIoHFGvmicwDdzexaBBQtQKiGyUlBmrxojNBj8Xnh/cpNS"));
-
         SpringApplication.run(ApiOrionApplication.class, args);
     }
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ApiOrionApplication.class);
     }
-//$2a$12$79w.JmrXIoHFGvmicwDdzexaBBQtQKiGyUlBmrxojNBj8Xnh/cpNS
 }

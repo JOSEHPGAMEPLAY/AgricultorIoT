@@ -14,9 +14,16 @@ import java.util.Optional;
 @Service
 public class HibernaderoServiceImpl implements HibernaderoService {
 
+    /**
+     * Repositorio de hibernaderos
+     */
     @Autowired
     HibernaderoRepository hibernaderoRepository;
 
+    /**
+     * Metodo que permite obtener todos los hibernaderos
+     * @return lista de hibernaderos
+     */
     @Override
     public ResponseEntity<?> buscarTodos() {
         try {
@@ -32,6 +39,11 @@ public class HibernaderoServiceImpl implements HibernaderoService {
         }
     }
 
+    /**
+     * Metodo que permite obtener un hibernadero por su id
+     * @param id id del hibernadero
+     * @return hibernadero
+     */
     @Override
     public ResponseEntity<?> buscar(String id) {
         try {
@@ -47,6 +59,11 @@ public class HibernaderoServiceImpl implements HibernaderoService {
         }
     }
 
+    /**
+     * Metodo que permite insertar un hibernadero
+     * @param object hibernadero
+     * @return hibernadero insertado
+     */
     @Override
     public ResponseEntity<?> insertar(Object object) {
         try {
@@ -59,6 +76,11 @@ public class HibernaderoServiceImpl implements HibernaderoService {
         }
     }
 
+    /**
+     * Metodo que permite actualizar un hibernadero
+     * @param object hibernadero
+     * @return hibernadero actualizado
+     */
     @Override
     public ResponseEntity<?> actualizar(Object object) {
         try {
@@ -71,6 +93,11 @@ public class HibernaderoServiceImpl implements HibernaderoService {
         }
     }
 
+    /**
+     * Metodo que permite eliminar un hibernadero
+     * @param id id del hibernadero
+     * @return mensaje de confirmacion
+     */
     @Override
     public ResponseEntity<?> eliminar(String id) {
         try {

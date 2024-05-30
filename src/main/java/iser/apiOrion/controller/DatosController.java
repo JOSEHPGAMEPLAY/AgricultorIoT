@@ -21,17 +21,12 @@ public class DatosController {
     public ResponseEntity<?> rangoFechasPorHibernadero(@RequestParam("fechaInicial")    String fechaIncial,
                                                        @RequestParam("fechafinal")      String fechaFinal,
                                                        @RequestParam("idSensor")        String idSensor ) throws ParseException {
-
-        //String fechaString = "2024-05-09";
-
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");//String fechaString = "2024-05-09";
         Date fechainicio = formato.parse(fechaIncial);
         Date fechafinal = formato.parse(fechaFinal);
         return datosService.rangofecha(fechainicio, fechafinal, idSensor);
     }
 
-    //insertar
     @PostMapping("/insertar")
     public ResponseEntity<?> insertar(@RequestParam("idSensor") String idSensor,
                                      @RequestParam("valor") String valor) throws ParseException {

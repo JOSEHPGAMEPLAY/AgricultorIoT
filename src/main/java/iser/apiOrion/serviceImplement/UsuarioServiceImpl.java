@@ -12,9 +12,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
+    /**
+     * Repositorio de usuario
+     */
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    /**
+     * Metodo que permite insertar un usuario
+     * @param usuario usuario a insertar
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> insertar(Usuario usuario) {
         try {
@@ -28,6 +36,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /**
+     * Metodo que permite actualizar un usuario
+     * @param usuario usuario a actualizar
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> actualizar(Usuario usuario) {
         try {
@@ -39,6 +52,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /**
+     * Metodo que permite eliminar un usuario
+     * @param id id del usuario
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> eliminar(String id) {
         try {
@@ -50,6 +68,11 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /**
+     * Metodo que permite buscar un usuario por su id
+     * @param id id del usuario
+     * @return usuario
+     */
     @Override
     public ResponseEntity<?> buscar(String id) {
         try {
@@ -60,6 +83,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    /**
+     * Metodo que permite buscar todos los usuarios
+     * @return lista de usuarios
+     */
     @Override
     public ResponseEntity<?> buscarTodos() {
         try {
