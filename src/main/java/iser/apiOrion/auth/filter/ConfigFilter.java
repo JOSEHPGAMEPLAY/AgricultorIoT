@@ -1,4 +1,4 @@
-package iser.apiOrion.config.filter;
+package iser.apiOrion.auth.filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigFilter {
 
-    // TODO: Se pueden los @Value para crear las variables de validar los filtros
-
-
+/*
     @Bean
     public FilterRegistrationBean<CustomFilter> filterRegistrationBean() {
         FilterRegistrationBean<CustomFilter> registrationBean = new FilterRegistrationBean<>();
@@ -17,8 +15,10 @@ public class ConfigFilter {
         CustomFilter customFilter = new CustomFilter();
 
         registrationBean.setFilter(customFilter);
-        registrationBean.addUrlPatterns("/*");
+        registrationBean.addUrlPatterns("/api/*");
         return registrationBean;
     }
+
+ */
 
 }
