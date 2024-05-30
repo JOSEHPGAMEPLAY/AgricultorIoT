@@ -16,11 +16,23 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class EmailServiceImplement implements EmailService {
 
+    /**
+     * mailSender :: gmail email server configuration
+     */
     @Autowired
     private JavaMailSender mailSender;
 
+    /**
+     * logger :: log for EmailServiceImplement
+     */
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
+    /**
+     * sendMail :: send email
+     * @param to :: email recipient
+     * @param subject :: email subject
+     * @param text :: email text
+     */
     @Override
     public void sendMail(String[] to, String subject, String text) {
         try{
@@ -37,6 +49,13 @@ public class EmailServiceImplement implements EmailService {
         }
     }
 
+    /**
+     * sendMail :: send email with attachment
+     * @param to :: email recipient
+     * @param subject :: email subject
+     * @param text :: email text
+     * @param file :: file to attach
+     */
     @Override
     public void sendMail(String[] to, String subject, String text, File file){
         try {
