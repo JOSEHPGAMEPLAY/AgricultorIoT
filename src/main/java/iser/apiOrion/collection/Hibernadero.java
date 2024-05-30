@@ -2,6 +2,8 @@ package iser.apiOrion.collection;
 
 
 import lombok.Data;
+import org.springframework.aot.generate.Generated;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -9,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "hibernadero")
 public class Hibernadero {
 
-    @Field(name = "_id")
+    @Id
     private String id;
 
     @Field(name = "imagen")

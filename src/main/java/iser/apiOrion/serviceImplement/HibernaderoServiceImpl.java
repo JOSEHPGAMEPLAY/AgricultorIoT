@@ -74,7 +74,14 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     @Override
     public ResponseEntity<?> eliminar(String id) {
         try {
-            hibernaderoRepository.deleteById(id);
+            System.out.println("id: "+id);
+            Optional<Hibernadero> hibernadero = hibernaderoRepository.findById(id);
+            if (hibernadero.isEmpty()) {
+                System.out.println("No se encontro el hibernadero");
+                return ResponseEntity.noContent().build();
+            }
+            System.out.println("hibernadero: "+hibernadero.get());
+            hibernaderoRepository.deleteById(hibernadero.get().getId());
             return ResponseEntity.ok().body("Hibernadero eliminado");
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
