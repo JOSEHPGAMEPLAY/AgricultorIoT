@@ -5,6 +5,7 @@ import iser.apiOrion.auth.dto.LoginDto;
 import iser.apiOrion.auth.service.AuthService;
 import iser.apiOrion.collection.Usuario;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,8 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-        return this.authService.login(loginDto);
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto, HttpServletResponse response) {
+        return this.authService.login(loginDto, response);
     }
 
     @PostMapping("/register")

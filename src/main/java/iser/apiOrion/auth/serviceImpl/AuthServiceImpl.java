@@ -1,10 +1,12 @@
 package iser.apiOrion.auth.serviceImpl;
 
 import iser.apiOrion.auth.dto.LoginDto;
+import iser.apiOrion.auth.dto.TokenValidationResult;
 import iser.apiOrion.auth.service.AuthService;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.repository.UsuarioRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public ResponseEntity<?> login(LoginDto loginDto) {
+    public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response) {
         try {
             Optional<Usuario> usuario = usuarioRepository.findByUsuario(loginDto.getUsuario());
             if (usuario.isEmpty()) {
@@ -35,9 +37,11 @@ public class AuthServiceImpl implements AuthService {
             if (!JwtTokenProvider.matchPassword(loginDto.getClave(), usuario.get().getClave())) {
                 return new ResponseEntity<>("clave incorrecta", HttpStatus.BAD_REQUEST);
             }
-            Map<String, String> response = new HashMap<>();
-            response.put("token", jwtTokenProvider.createToken(loginDto));
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            //Map<String, String> response = new HashMap<>();
+            //response.put("token", jwtTokenProvider.createToken(loginDto));
+            response.addHeader("Authorization", jwtTokenProvider.createToken(loginDto.getUsuario()));
+            response.addHeader("Access-Control-Expose-Headers", "Authorization");
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -46,9 +50,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResponseEntity<?> register(Usuario usuario, HttpServletRequest request) {
         try {
-            String jwt = jwtTokenProvider.resolveToken(request);
-            if (jwt == null) {
-                return new ResponseEntity<>("Token no valido", HttpStatus.BAD_REQUEST);
+            String jwt = this.jwtTokenProvider.extractToken(request);
+
+            TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(jwt);
+            if (!validationResult.isValid()) {
+                return new ResponseEntity<>(validationResult.getMessage(), HttpStatus.UNAUTHORIZED);
             }
             if (this.jwtTokenProvider.getSubject(jwt).equals("ROOT")) {
                 Optional<Usuario> usuario1 = usuarioRepository.findByUsuario(usuario.getUsuario());
