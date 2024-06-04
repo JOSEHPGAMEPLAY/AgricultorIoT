@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import iser.apiOrion.collection.Hibernadero;
 import iser.apiOrion.service.HibernaderoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,12 +47,12 @@ public class HIbernaderoController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscar")
-    public ResponseEntity<?> buscar(String id) {
+    public ResponseEntity<?> buscar(String id, HttpServletRequest request) {
         return hibernaderoService.buscar(id);
     }
 
     @Operation(summary = "Insertar un hibernadero",
-            description = "Inserta un hibernadero en la base de datos, Insertando los detalles de un hibernadero en la base de datos.")
+            description = "Inserta un hibernadero en la base de datos, Insertando los detalles de un hibernadero en la base de datos. \n Nota: el campo de imagen debe ir un base 64.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
