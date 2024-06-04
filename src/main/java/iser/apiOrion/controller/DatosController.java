@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import iser.apiOrion.DTO.DatosDTO;
 import iser.apiOrion.collection.Datos;
 import iser.apiOrion.service.DatosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,15 +51,15 @@ public class DatosController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Datos.class))}),
+                            schema = @Schema(implementation = DatosDTO.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/insertar")
-    public ResponseEntity<?> insertar(@RequestParam("idSensor") String idSensor,
-                                     @RequestParam("valor") String valor) {
+    public ResponseEntity<?> insertar(@RequestBody DatosDTO datosDTO)  {
         Date fechaDate = new Date();
-        return datosService.insertar(idSensor, valor, fechaDate);
+        System.out.println("Datos: " + datosDTO.getIdSensor() + " " + datosDTO.getValor() + " " + fechaDate);
+        return datosService.insertar(datosDTO.getIdSensor(), datosDTO.getValor(), fechaDate);
     }
 
 

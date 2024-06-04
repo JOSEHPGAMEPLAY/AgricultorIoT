@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,18 +28,36 @@ public class CustomFilter implements Filter {
         //res.setHeader("Access-Control-Allow-Origin", "*");
         //res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
         //res.setHeader("Access-Control-Max-Age", "3600");
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Max-Age", "3600");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
 
+        System.out.println("---------------------------------------------------------");
+
+        Enumeration<String> headerNames = req.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = headerNames.nextElement();
+            System.out.println(headerName + ": " + req.getHeader(headerName));
+        }
+        System.out.println("---------------------------------------------------------");
+
+        System.out.println("Request Method: " + ((HttpServletRequest) request).getHeader("Authorization"));
+        System.out.println(" Request Headers: " + req.getHeader("Authorization"));
+        System.out.println(" Response Headers: " + res.getHeader("Authorization"));
         System.out.println(" URI: " + req.getRequestURI());
         System.out.println(" Requieres token? " + this.jwtTokenProvider.requestURINoToken(req.getRequestURI()));
 
-        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI())) {
+        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) ) {
             System.out.println("No requiere token");
             chain.doFilter(request, response);
         } else {
             System.out.println("Requiere token");
 
             String token = this.jwtTokenProvider.extractToken(req);
+
+            System.out.println("Token: =========>   " + token);
 
             TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(token);
             if (validationResult.isValid()) {
