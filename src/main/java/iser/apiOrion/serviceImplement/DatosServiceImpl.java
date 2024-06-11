@@ -1,8 +1,10 @@
 package iser.apiOrion.serviceImplement;
 
 
+import iser.apiOrion.auth.serviceImpl.JwtTokenProvider;
 import iser.apiOrion.collection.Datos;
 import iser.apiOrion.repository.DatosRepository;
+import iser.apiOrion.repository.SensorRepository;
 import iser.apiOrion.service.DatosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,12 @@ public class DatosServiceImpl implements DatosService {
      */
     @Autowired
     DatosRepository datosRepository;
+
+    @Autowired
+    SensorRepository sensorRepository;
+
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
 
     /**
      * Metodo que permite obtener los datos de un sensor en un rango de fechas

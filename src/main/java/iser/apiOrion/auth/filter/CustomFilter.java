@@ -7,6 +7,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -20,6 +21,12 @@ public class CustomFilter implements Filter {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Value("${valida.insertar-datos.requestURI.igual-noToken:total-lock}")
+    private String insertarDatosRequestURI;
+
+    @Value("${clave.valida.datos:total-lock}")
+    private String claveValidaDatos;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -49,15 +56,13 @@ public class CustomFilter implements Filter {
         System.out.println(" URI: " + req.getRequestURI());
         System.out.println(" Requieres token? " + this.jwtTokenProvider.requestURINoToken(req.getRequestURI()));
 
-        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) ) {
+        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) || (req.getRequestURI().equals(insertarDatosRequestURI) && res.getHeader("clave").equals(claveValidaDatos))) {
             System.out.println("No requiere token");
             chain.doFilter(request, response);
         } else {
             System.out.println("Requiere token");
 
             String token = this.jwtTokenProvider.extractToken(req);
-
-            System.out.println("Token: =========>   " + token);
 
             TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(token);
             if (validationResult.isValid()) {

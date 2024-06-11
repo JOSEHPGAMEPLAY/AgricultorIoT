@@ -55,17 +55,13 @@ public class JwtTokenProvider {
             timeTokenExpiration = TOKEN_EXPIRATION_MINUTES * 60 * 1000;
             System.out.println("timeTokenExpiration = " + timeTokenExpiration);
 
-            String token = Jwts.builder()
+            return Jwts.builder()
                     //.setClaims(extraClaims)
                     .setSubject(username)
                     .signWith(this.getSecretKey())
                     .setIssuedAt(new Date(System.currentTimeMillis()))
                     .setExpiration(new Date(System.currentTimeMillis() + timeTokenExpiration))
                     .compact();
-
-            System.out.println("token creado" + token);
-
-            return token;
 
         } catch (Exception e) {
             throw new RuntimeException("Error creating token");
