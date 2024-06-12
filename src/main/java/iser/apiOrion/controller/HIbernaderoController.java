@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/hibernadero")
+@CrossOrigin(origins = "*")
 public class HIbernaderoController {
 
     @Autowired

@@ -4,6 +4,7 @@ import iser.apiOrion.auth.dto.LoginDto;
 import iser.apiOrion.auth.dto.TokenValidationResult;
 import iser.apiOrion.auth.serviceImpl.JwtTokenProvider;
 import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
+@WebFilter("/*")
 public class CustomFilter implements Filter {
 
     @Autowired
@@ -31,6 +33,7 @@ public class CustomFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        System.out.println(" Request Headers: " + req.getHeader("Authorization"));
         HttpServletResponse res = (HttpServletResponse) response;
         //res.setHeader("Access-Control-Allow-Origin", "*");
         //res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
@@ -55,8 +58,12 @@ public class CustomFilter implements Filter {
         System.out.println(" Response Headers: " + res.getHeader("Authorization"));
         System.out.println(" URI: " + req.getRequestURI());
         System.out.println(" Requieres token? " + this.jwtTokenProvider.requestURINoToken(req.getRequestURI()));
+        System.out.println(" clave ==> " + claveValidaDatos);
+        if (req.getHeader("clave") != null) {
+            System.out.println(" Tiene la validacion en el header ==>  " + req.getHeader("clave").equals(claveValidaDatos));
+        }
 
-        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) || (req.getRequestURI().equals(insertarDatosRequestURI) && res.getHeader("clave").equals(claveValidaDatos))) {
+        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) || (req.getRequestURI().equals(insertarDatosRequestURI) && req.getHeader("clave").equals(claveValidaDatos))) {
             System.out.println("No requiere token");
             chain.doFilter(request, response);
         } else {
