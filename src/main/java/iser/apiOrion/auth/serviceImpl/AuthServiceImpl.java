@@ -31,15 +31,12 @@ public class AuthServiceImpl implements AuthService {
     public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
         try {
             Optional<Usuario> usuario = usuarioRepository.findByUsuario(loginDto.getUsuario());
-            System.out.println("usuario: " + usuario);
             if (usuario.isEmpty()) {
                 return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
             }
             if (!JwtTokenProvider.matchPassword(loginDto.getClave(), usuario.get().getClave())) {
                 return new ResponseEntity<>("clave incorrecta", HttpStatus.BAD_REQUEST);
             }
-            //Map<String, String> response = new HashMap<>();
-            //response.put("token", jwtTokenProvider.createToken(loginDto));
             response.addHeader("Authorization", jwtTokenProvider.createToken(loginDto.getUsuario()));
             response.addHeader("Access-Control-Expose-Headers", "Authorization");
             return ResponseEntity.ok().build();
@@ -54,7 +51,6 @@ public class AuthServiceImpl implements AuthService {
     public ResponseEntity<?> register(Usuario usuario, HttpServletRequest request) {
         try {
             String jwt = this.jwtTokenProvider.extractToken(request);
-
             TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(jwt);
             if (!validationResult.isValid()) {
                 return new ResponseEntity<>(validationResult.getMessage(), HttpStatus.UNAUTHORIZED);
@@ -64,13 +60,14 @@ public class AuthServiceImpl implements AuthService {
                 if (usuario1.isPresent()) {
                     return new ResponseEntity<>("Usuario ya registrado", HttpStatus.BAD_REQUEST);
                 }
-                usuario.setClave(JwtTokenProvider.passwordEncoder(usuario1.get().getClave()));
+                usuario.setClave(JwtTokenProvider.passwordEncoder(usuario.getClave()));
                 usuarioRepository.save(usuario);
                 return new ResponseEntity<>("Usuario registrado", HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("No tiene permisos para registrar usuario", HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
+            System.out.println("ERROR_MESSAGE: " + e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
