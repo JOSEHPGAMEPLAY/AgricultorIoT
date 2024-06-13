@@ -3,11 +3,7 @@ package iser.apiOrion.auth.serviceImpl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import io.jsonwebtoken.*;
-
-import java.security.Key;
-
 import io.jsonwebtoken.security.Keys;
-import iser.apiOrion.auth.dto.LoginDto;
 import iser.apiOrion.auth.dto.TokenValidationResult;
 import iser.apiOrion.repository.UsuarioRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 
 @Component
@@ -84,6 +81,7 @@ public class JwtTokenProvider {
         } catch (SignatureException e) {
             return new TokenValidationResult(false, null, "Firma no v\u00e1lida");
         } catch (Exception e) {
+            System.out.println("Error en la validaci\u00f3n del token"+ e.getMessage());
             return new TokenValidationResult(false, null, "Error en la validaci\u00f3n del token");
         }
     }
@@ -102,6 +100,7 @@ public class JwtTokenProvider {
 
     public String extractToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
+        System.out.println("bearerToken = " + bearerToken);
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }

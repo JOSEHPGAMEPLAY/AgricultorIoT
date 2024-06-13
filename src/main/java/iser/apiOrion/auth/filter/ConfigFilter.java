@@ -1,5 +1,6 @@
 package iser.apiOrion.auth.filter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,18 +8,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigFilter {
 
-/*
+    @Autowired
+    private CustomFilter customFilter;
+
     @Bean
     public FilterRegistrationBean<CustomFilter> filterRegistrationBean() {
         FilterRegistrationBean<CustomFilter> registrationBean = new FilterRegistrationBean<>();
 
-        CustomFilter customFilter = new CustomFilter();
-
         registrationBean.setFilter(customFilter);
-        registrationBean.addUrlPatterns("/api/*");
+        registrationBean.addUrlPatterns("/*");
         return registrationBean;
     }
-
- */
 
 }

@@ -1,25 +1,21 @@
 package iser.apiOrion.auth.filter;
 
-import iser.apiOrion.auth.dto.LoginDto;
 import iser.apiOrion.auth.dto.TokenValidationResult;
 import iser.apiOrion.auth.serviceImpl.JwtTokenProvider;
-import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Set;
 
-@Component
-@WebFilter("/*")
-public class CustomFilter implements Filter {
+@Service
+public class CustomFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -31,66 +27,65 @@ public class CustomFilter implements Filter {
     private String claveValidaDatos;
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        System.out.println(" Request Headers: " + req.getHeader("Authorization"));
-        HttpServletResponse res = (HttpServletResponse) response;
-        //res.setHeader("Access-Control-Allow-Origin", "*");
-        //res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-        //res.setHeader("Access-Control-Max-Age", "3600");
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+        //response.setHeader("Access-Control-Allow-Origin", "*");
+        //response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+        //response.setHeader("Access-Control-Max-Age", "3600");
 
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-        res.setHeader("Access-Control-Max-Age", "3600");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, Content-Length, X-Requested-With");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        // Manejar solicitudes OPTIONS (preflight)
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
 
         System.out.println("---------------------------------------------------------");
 
-        Enumeration<String> headerNames = req.getHeaderNames();
+        Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
-            System.out.println(headerName + ": " + req.getHeader(headerName));
+            System.out.println(headerName + ": " + request.getHeader(headerName));
         }
         System.out.println("---------------------------------------------------------");
 
-        System.out.println("Request Method: " + ((HttpServletRequest) request).getHeader("Authorization"));
-        System.out.println(" Request Headers: " + req.getHeader("Authorization"));
-        System.out.println(" Response Headers: " + res.getHeader("Authorization"));
-        System.out.println(" URI: " + req.getRequestURI());
-        System.out.println(" Requieres token? " + this.jwtTokenProvider.requestURINoToken(req.getRequestURI()));
-        System.out.println(" clave ==> " + claveValidaDatos);
-        if (req.getHeader("clave") != null) {
-            System.out.println(" Tiene la validacion en el header ==>  " + req.getHeader("clave").equals(claveValidaDatos));
-        }
+        // Handle CORS preflight requests
+        System.out.println(" Request Headers (Authorization): " + request.getHeader("authorization"));
+        System.out.println("Request Method: " + request.getMethod());
 
-        if (this.jwtTokenProvider.requestURINoToken(req.getRequestURI()) || (req.getRequestURI().equals(insertarDatosRequestURI) && req.getHeader("clave").equals(claveValidaDatos))) {
+        // Print specific information
+        System.out.println(" Origin: " + request.getHeader("Origin"));
+        System.out.println(" Request Headers (Authorization): " + request.getHeader("Authorization"));
+        System.out.println(" URI: " + request.getRequestURI());
+        System.out.println(" NO Requieres token? " + this.jwtTokenProvider.requestURINoToken(request.getRequestURI()));
+
+        /*if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            System.out.println("Handling CORS preflight request");
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }*/
+
+        if (this.jwtTokenProvider.requestURINoToken(request.getRequestURI()) || (request.getRequestURI().equals(insertarDatosRequestURI) && request.getHeader("clave").equals(claveValidaDatos))) {
             System.out.println("No requiere token");
             chain.doFilter(request, response);
         } else {
             System.out.println("Requiere token");
 
-            String token = this.jwtTokenProvider.extractToken(req);
+            String token = this.jwtTokenProvider.extractToken(request);
 
             TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(token);
             if (validationResult.isValid()) {
                 System.out.println("Token valido");
-                res.addHeader("Authorization", jwtTokenProvider.createToken(this.jwtTokenProvider.getSubject(token)));
-                res.addHeader("Access-Control-Expose-Headers", "Authorization");
+                response.addHeader("Authorization", jwtTokenProvider.createToken(this.jwtTokenProvider.getSubject(token)));
+                response.addHeader("Access-Control-Expose-Headers", "Authorization");
                 chain.doFilter(request, response);
             } else {
                 System.out.println("Token invalido: " + validationResult.getMessage());
-                res.sendError(HttpServletResponse.SC_UNAUTHORIZED, validationResult.getMessage());
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, validationResult.getMessage());
             }
         }
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("Init Filter");
-    }
-
-    @Override
-    public void destroy() {
-        System.out.println("Destroy Filter");
     }
 }

@@ -28,7 +28,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response) {
+    public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
         try {
             Optional<Usuario> usuario = usuarioRepository.findByUsuario(loginDto.getUsuario());
             System.out.println("usuario: " + usuario);
