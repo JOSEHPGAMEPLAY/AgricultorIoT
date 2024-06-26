@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import static iser.apiOrion.email.EmailConstant.formularioRegistrado;
+import static iser.apiOrion.email.EmailConstant.usuarioAceptado;
 
 @Service
 public class FormularioServiceImpl implements FormularioService {
@@ -108,6 +109,33 @@ public class FormularioServiceImpl implements FormularioService {
             return ResponseEntity.ok(formularioRepository.save(formulario));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al crear el formulario");
+        }
+    }
+
+    /**
+     * Metodo que permite aceptar un usuario
+     * @param idFormulario id del formulario a aceptar
+     * @return ResponseEntity con el resultado de la operacion
+     */
+    @Override
+    public ResponseEntity<?> aceptarUsuario(String idFormulario) {
+        try {
+            Optional<Formulario> formularioOptional = formularioRepository.findById(idFormulario);
+            if (formularioOptional.isEmpty()) {
+                return ResponseEntity.badRequest().body("El formulario no existe");
+            }
+            Formulario formulario = formularioOptional.get();
+            formulario.setEstado("ACEPTADO");
+            Usuario usuario = new Usuario();
+            usuario.setUsuario(formulario.getUsuario());
+            usuario.setClave(formulario.getClave());
+            usuario.setNombres(formulario.getNombres());
+            usuario.setEmail(formulario.getEmail());
+            Usuario usuarioGuardado = usuarioRepository.save(usuario);
+            emailService.sendMail(new String[]{usuario.getEmail()}, "Usuario Aceptado", usuarioAceptado());
+            return ResponseEntity.ok(usuarioGuardado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al aceptar el usuario");
         }
     }
 }

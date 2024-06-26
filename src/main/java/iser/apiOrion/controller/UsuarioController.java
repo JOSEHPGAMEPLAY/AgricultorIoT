@@ -12,10 +12,7 @@ import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/usuario")
@@ -68,5 +65,22 @@ public class UsuarioController {
     public ResponseEntity<?> actualizar(Usuario usuario) {
         return usuarioService.actualizar(usuario);
     }
+
+    //eliminar
+    @Operation(summary = "Eliminar un usuario",
+            description = "Elimina los datos de un usuario en la base de datos, Eliminando los detalles de un usuario en la base de datos.")
+    @ApiResponses(value = {
+
+            @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"operacion exitosa\"}"))}),
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                    examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @DeleteMapping("/eliminar")
+    public ResponseEntity<?> eliminar(String id) {
+        return usuarioService.eliminar(id);
+    }
+
 
 }

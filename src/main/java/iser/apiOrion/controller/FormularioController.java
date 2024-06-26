@@ -81,7 +81,6 @@ public class FormularioController {
         return formularioService.buscarPorId(id);
     }
 
-    //actualizar
     @Operation(summary = "Actualizar un formulario de solicitud de participacion en el proyecto.",
             description = "Actualiza un formulario de solicitud para participar en el proyecto, Actualizando los detalles de un formulario en la base de datos.")
     @ApiResponses(value = {
@@ -95,6 +94,22 @@ public class FormularioController {
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(Formulario formulario){
         return formularioService.actualizar(formulario);
+    }
+
+    //aceptar usuario
+    @Operation(summary = "Aceptar un usuario en el proyecto.",
+            description = "Acepta un usuario en el proyecto, Actualizando los detalles de un formulario en la base de datos.")
+    @ApiResponses(value = {
+
+                @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                        content = { @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = Formulario.class))}),
+                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @PostMapping("/aceptarUsuario")
+    public ResponseEntity<?> aceptarUsuario(@RequestBody String idFormulario){
+        return formularioService.aceptarUsuario(idFormulario);
     }
 
 }

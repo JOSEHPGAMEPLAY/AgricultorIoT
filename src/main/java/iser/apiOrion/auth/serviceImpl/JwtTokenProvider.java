@@ -45,7 +45,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    public String createToken(String username) {
+    public String createToken(String username, String idUsuario) {
 
         try {
             long timeTokenExpiration;
@@ -55,6 +55,7 @@ public class JwtTokenProvider {
             return Jwts.builder()
                     //.setClaims(extraClaims)
                     .setSubject(username)
+                    .claim("idUsuario", idUsuario)
                     .signWith(this.getSecretKey())
                     .setIssuedAt(new Date(System.currentTimeMillis()))
                     .setExpiration(new Date(System.currentTimeMillis() + timeTokenExpiration))

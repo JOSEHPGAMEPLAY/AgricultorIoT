@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
             if (!JwtTokenProvider.matchPassword(loginDto.getClave(), usuario.get().getClave())) {
                 return new ResponseEntity<>("clave incorrecta", HttpStatus.BAD_REQUEST);
             }
-            response.addHeader("Authorization", jwtTokenProvider.createToken(loginDto.getUsuario()));
+            response.addHeader("Authorization", jwtTokenProvider.createToken(loginDto.getUsuario(), usuario.get().getId()));
             response.addHeader("Access-Control-Expose-Headers", "Authorization");
             return ResponseEntity.ok().build();
         } catch (Exception e) {

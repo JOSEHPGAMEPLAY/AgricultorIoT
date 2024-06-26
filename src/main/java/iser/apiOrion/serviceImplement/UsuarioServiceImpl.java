@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -60,6 +62,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public ResponseEntity<?> eliminar(String id) {
         try {
+            Optional<Usuario> usuario = usuarioRepository.findById(id);
+            if(usuario.isEmpty()){
+                return ResponseEntity.badRequest().body("Usuario no encontrado.");
+            }
             usuarioRepository.deleteById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

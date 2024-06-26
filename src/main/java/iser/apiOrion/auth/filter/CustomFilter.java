@@ -79,7 +79,7 @@ public class CustomFilter extends OncePerRequestFilter {
             TokenValidationResult validationResult = this.jwtTokenProvider.resolveToken(token);
             if (validationResult.isValid()) {
                 System.out.println("Token valido");
-                response.addHeader("Authorization", jwtTokenProvider.createToken(this.jwtTokenProvider.getSubject(token)));
+                response.addHeader("Authorization", jwtTokenProvider.createToken(this.jwtTokenProvider.getSubject(token), validationResult.getClaims().get("idUsuario").toString()));
                 response.addHeader("Access-Control-Expose-Headers", "Authorization");
                 chain.doFilter(request, response);
             } else {

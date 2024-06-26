@@ -15,4 +15,6 @@ public interface FormularioService {
 
     ResponseEntity<?> crear(Formulario formulario);
 
+    ResponseEntity<?> aceptarUsuario(String idFormulario);
+
 }
