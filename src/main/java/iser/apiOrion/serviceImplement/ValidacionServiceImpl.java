@@ -24,6 +24,11 @@ public class ValidacionServiceImpl implements ValidacionService {
     @Autowired
     EmailService emailService;
 
+    /**
+     * Metodo que permite crear un codigo de validacion
+     * @param usuario usuario al que se le enviara el codigo
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> crearCodigoValidacion(String usuario) {
         try {
@@ -53,6 +58,12 @@ public class ValidacionServiceImpl implements ValidacionService {
         }
     }
 
+    /**
+     * Metodo que permite validar un codigo de validacion
+     * @param usuario usuario al que se le enviara el codigo
+     * @param codigo codigo de validacion
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> validarCodigoValidacion(String usuario, String codigo) {
         try {
