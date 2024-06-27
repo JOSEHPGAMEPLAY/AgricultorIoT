@@ -89,9 +89,9 @@ public class SensorController {
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
-    @GetMapping("/obtenerPorHibernadero")
-    public ResponseEntity<?> obtenerPorHibernadero(@RequestParam String idHibernadero){
-        return sensorService.buscarPorHibernadero(idHibernadero);
+    @GetMapping("/obtenerPorEstacion")
+    public ResponseEntity<?> obtenerPorEstacion(@RequestParam String idHibernadero){
+        return sensorService.buscarPorEstacion(idHibernadero);
     }
 
 }

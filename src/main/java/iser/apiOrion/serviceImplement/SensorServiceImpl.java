@@ -153,10 +153,24 @@ public class SensorServiceImpl implements SensorService {
      * @return lista de sensores
      */
     @Override
-    public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
+    public ResponseEntity<?> buscarPorEstacion(String idHibernadero) {
         try {
             List<Sensor> sensors = sensorRepository.findByidHibernadero(idHibernadero);
-            return ResponseEntity.ok(sensors);
+            List<SensorDTO> sensorDTOList = new ArrayList<>();
+            String ubicacion = "";
+            for(Sensor sensor : sensors){
+                SensorDTO sensorDTO = new SensorDTO();
+                sensorDTO.setId(sensor.getId());
+                sensorDTO.setIdHibernadero(sensor.getIdHibernadero());
+                sensorDTO.setNombre(sensor.getNombre());
+                sensorDTO.setDescripcion(sensor.getDescripcion());
+                sensorDTO.setConfig(sensor.isConfig());
+                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdHibernadero());
+                ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                sensorDTO.setUbicacion(ubicacion);
+                sensorDTOList.add(sensorDTO);
+            }
+            return ResponseEntity.ok(sensorDTOList);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
