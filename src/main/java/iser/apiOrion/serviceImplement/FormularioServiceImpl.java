@@ -21,12 +21,21 @@ import static iser.apiOrion.email.EmailConstant.usuarioAceptado;
 @Service
 public class FormularioServiceImpl implements FormularioService {
 
+    /**
+     * Repositorio de formularios
+     */
     @Autowired
     FormularioRepository formularioRepository;
 
+    /**
+     * Servicio de email
+     */
     @Autowired
     EmailService emailService;
 
+    /**
+     * Repositorio de usuarios
+     */
     @Autowired
     UsuarioRepository usuarioRepository;
 
@@ -127,6 +136,9 @@ public class FormularioServiceImpl implements FormularioService {
                 return ResponseEntity.badRequest().body(buildMessage("El formulario no existe"));
             }
             Formulario formulario = formularioOptional.get();
+            if (usuarioRepository.findByUsuario(formulario.getUsuario()).isPresent()) {
+                return ResponseEntity.badRequest().body(buildMessage("El nombre de usuario ya existe"));
+            }
             Usuario usuario = new Usuario();
             usuario.setUsuario(formulario.getUsuario());
             usuario.setClave(JwtTokenProvider.passwordEncoder(formulario.getClave()));

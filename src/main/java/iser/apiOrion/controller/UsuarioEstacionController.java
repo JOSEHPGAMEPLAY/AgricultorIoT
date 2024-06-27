@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import iser.apiOrion.DTO.EstacionDTO;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.collection.UsuarioEstacion;
 import iser.apiOrion.service.UsuarioEstacionService;
@@ -87,7 +88,7 @@ public class UsuarioEstacionController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioEstacion.class))}),
+                            schema = @Schema(implementation = EstacionDTO.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })

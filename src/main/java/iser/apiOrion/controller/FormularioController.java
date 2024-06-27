@@ -107,7 +107,7 @@ public class FormularioController {
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/aceptarUsuario")
-    public ResponseEntity<?> aceptarUsuario(@RequestParam String idFormulario){
+    public ResponseEntity<?> aceptarUsuario(@RequestBody String idFormulario){
         return formularioService.aceptarUsuario(idFormulario);
     }
 

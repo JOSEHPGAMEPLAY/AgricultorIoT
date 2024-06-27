@@ -178,7 +178,7 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
                 estaciones.add(estacionDTO);
             }
 
-            return ResponseEntity.ok(usuarioEstacions);
+            return ResponseEntity.ok(estaciones);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
             return ResponseEntity.badRequest().build();
