@@ -6,19 +6,19 @@ import lombok.Data;
 public class UsuarioEstacionDTO {
 
     /*
-     * id: Identificador de la estación
-     * idEstacion: Identificador de la estación
+     * id: Identificador de la estacion
+     * idEstacion: Identificador de la estacion
      * idUsuario: Identificador del usuario
-     * imagen: Imagen de la estación
-     * ciudad: Ciudad de la estación
-     * departamento: Departamento de la estación
-     * nombre: Nombre de la estación
-     * encargado: Encargado de la estación
-     * detalles: Detalles de la estación
-     * estado: Estado de la estación
+     * imagen: Imagen de la estacion
+     * ciudad: Ciudad de la estacion
+     * departamento: Departamento de la estacion
+     * nombre: Nombre de la estacion
+     * encargado: Encargado de la estacion
+     * detalles: Detalles de la estacion
+     * estado: Estado de la estacion
      * idTipoCultivo: Identificador del tipo de cultivo
      * nombreTipoCultivo: Nombre del tipo de cultivo
-     * Numero_Asociados: Número de asociados
+     * Numero_Asociados: Numero de asociados
      */
 
     private String id;

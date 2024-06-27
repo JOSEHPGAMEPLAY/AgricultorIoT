@@ -8,11 +8,11 @@ public class SensorDTO {
 
     /*
      * id: Identificador del sensor
-     * idEstacion: Identificador de la estación
+     * idEstacion: Identificador de la estacion
      * nombre: Nombre del sensor
-     * descripcion: Descripción del sensor
-     * config: Configuración del sensor
-     * ubicacion: Ubicación del sensor
+     * descripcion: Descripcion del sensor
+     * config: Configuracin del sensor
+     * ubicacion: Ubicacion del sensor
      */
 
     private String id;
