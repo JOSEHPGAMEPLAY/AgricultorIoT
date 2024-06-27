@@ -16,7 +16,7 @@ public class TipoCultivoServiceImpl implements TipoCultivoService {
     TipoCultivoRepository tipoCultivoRepository;
 
     /**
-     * Método que permite buscar todos los tipos de cultivo
+     * Metodo que permite buscar todos los tipos de cultivo
      * @return ResponseEntity con la respuesta de la solicitud
      */
     @Override
@@ -29,7 +29,7 @@ public class TipoCultivoServiceImpl implements TipoCultivoService {
     }
 
     /**
-     * Método que permite buscar un tipo de cultivo por su id
+     * Metodo que permite buscar un tipo de cultivo por su id
      * @param id identificador del tipo de cultivo
      * @return ResponseEntity con la respuesta de la solicitud
      */
@@ -43,8 +43,8 @@ public class TipoCultivoServiceImpl implements TipoCultivoService {
     }
 
     /**
-     * Método que permite guardar un tipo de cultivo
-     * @param tipoCultivo objeto con la información del tipo de cultivo
+     * Metodo que permite guardar un tipo de cultivo
+     * @param tipoCultivo objeto con la informacion del tipo de cultivo
      * @return ResponseEntity con la respuesta de la solicitud
      */
     @Override
@@ -57,8 +57,8 @@ public class TipoCultivoServiceImpl implements TipoCultivoService {
     }
 
     /**
-     * Método que permite actualizar un tipo de cultivo
-     * @param tipoCultivo objeto con la información del tipo de cultivo
+     * Metodo que permite actualizar un tipo de cultivo
+     * @param tipoCultivo objeto con la informacion del tipo de cultivo
      * @return ResponseEntity con la respuesta de la solicitud
      */
     @Override
@@ -75,7 +75,7 @@ public class TipoCultivoServiceImpl implements TipoCultivoService {
     }
 
     /**
-     * Método que permite eliminar un tipo de cultivo
+     * Metodo que permite eliminar un tipo de cultivo
      * @param id identificador del tipo de cultivo
      * @return ResponseEntity con la respuesta de la solicitud
      */

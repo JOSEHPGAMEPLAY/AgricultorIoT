@@ -61,6 +61,7 @@ public class UsuarioController {
     })
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(Usuario usuario) {
+        System.out.println("usuario: "+usuario.toString());
         return usuarioService.actualizar(usuario);
     }
 

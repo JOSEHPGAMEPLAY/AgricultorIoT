@@ -46,6 +46,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public ResponseEntity<?> actualizar(Usuario usuario) {
         try {
+            Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getId());
+            if(usuarioOptional.isEmpty()){
+                return ResponseEntity.badRequest().body("Usuario no encontrado.");
+            }
             usuarioRepository.save(usuario);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
