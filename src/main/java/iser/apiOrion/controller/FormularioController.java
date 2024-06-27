@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import iser.apiOrion.collection.Formulario;
-import iser.apiOrion.collection.Sensor;
+import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -96,14 +96,13 @@ public class FormularioController {
         return formularioService.actualizar(formulario);
     }
 
-    //aceptar usuario
     @Operation(summary = "Aceptar un usuario en el proyecto.",
             description = "Acepta un usuario en el proyecto, Actualizando los detalles de un formulario en la base de datos.")
     @ApiResponses(value = {
 
                 @ApiResponse(responseCode = "200", description = "operacion exitosa",
                         content = { @Content(mediaType = "application/json",
-                                schema = @Schema(implementation = Formulario.class))}),
+                                schema = @Schema(implementation = Usuario.class))}),
                 @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
