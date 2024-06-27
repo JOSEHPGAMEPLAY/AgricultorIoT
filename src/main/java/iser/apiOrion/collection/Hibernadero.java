@@ -35,5 +35,7 @@ public class Hibernadero {
     @Field(name = "estado")
     private String estado;
 
+    @Field(name = "idTipoCultivo")
+    private String idTipoCultivo;
 
 }
