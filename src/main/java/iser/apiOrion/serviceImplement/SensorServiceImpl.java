@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static iser.apiOrion.constant.messageConstant.buildMessage;
+
 @Service
 public class SensorServiceImpl implements SensorService {
 
@@ -92,7 +94,7 @@ public class SensorServiceImpl implements SensorService {
     public ResponseEntity<?> borrarSensor(String id) {
         try {
             sensorRepository.deleteById(id);
-            return ResponseEntity.ok("Sensor borrado");
+            return ResponseEntity.ok(buildMessage("Sensor borrado"));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());

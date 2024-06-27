@@ -48,7 +48,7 @@ public class EstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscar")
-    public ResponseEntity<?> buscar(String id, HttpServletRequest request) {
+    public ResponseEntity<?> buscar(@RequestParam String id, HttpServletRequest request) {
         return hibernaderoService.buscar(id);
     }
 
@@ -63,7 +63,7 @@ public class EstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/insertar")
-    public ResponseEntity<?> insertar(Estacion object) {
+    public ResponseEntity<?> insertar(@RequestBody Estacion object) {
         return hibernaderoService.insertar(object);
     }
 
@@ -78,7 +78,7 @@ public class EstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PutMapping("/actualizar")
-    public ResponseEntity<?> actualizar(Estacion object) {
+    public ResponseEntity<?> actualizar(@RequestBody Estacion object) {
         return hibernaderoService.actualizar(object);
     }
 

@@ -46,7 +46,7 @@ public class TipoCultivoController {
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarPorId")
-    public ResponseEntity<?> buscarPorId(String id) {
+    public ResponseEntity<?> buscarPorId(@RequestParam String id) {
         return tipoCultivoService.buscarPorId(id);
     }
 
@@ -92,7 +92,7 @@ public class TipoCultivoController {
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminar(String id) {
+    public ResponseEntity<?> eliminar(@RequestParam String id) {
         return tipoCultivoService.eliminar(id);
     }
 

@@ -14,14 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/usuarioHibernadero")
+@RequestMapping("/api/v1/usuarioEstacion")
 public class UsuarioEstacionController {
 
     @Autowired
     UsuarioEstacionService usuarioEstacionService;
 
-    @Operation(summary = "Buscar todos los datos de los hibernaderos y usuarios",
-            description = "Obtiene todos los usuarios asociados a los hibernaderos registrados en la base de datos, Consulta detalles de los usuarios asociados a los hibernaderos.")
+    @Operation(summary = "Buscar todos los datos de las estaciones y usuarios",
+            description = "Obtiene todos los usuarios asociados a las estaciones registrados en la base de datos, Consulta detalles de los usuarios asociados a las estaciones.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -30,13 +30,13 @@ public class UsuarioEstacionController {
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
-    @GetMapping("/buscarHibernaderosUsuario")
+    @GetMapping("/buscarEstacionesUsuario")
     public ResponseEntity<?> buscarTodos(String id) {
         return usuarioEstacionService.buscarHibernaderosUsuario(id);
     }
 
-    @Operation(summary = "Consulta por id de usuarioHibernadero",
-            description = "Obtiene los datos de un usuarioHibernadero en especifico por su id, Consulta detalles de un usuarioHibernadero en especifico.")
+    @Operation(summary = "Consulta por id de usuarioEstacion",
+            description = "Obtiene los datos de un usuarioEstacion en especifico por su id, Consulta detalles de un usuarioEstacion en especifico.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -50,8 +50,8 @@ public class UsuarioEstacionController {
         return usuarioEstacionService.buscarPorId(id);
     }
 
-    @Operation(summary = "Asocia un usuario a un hibernadero",
-            description = "Asocia un usuario a un hibernadero en la base de datos, Insertando los detalles de un usuario asociado a un hibernadero en la base de datos.")
+    @Operation(summary = "Asocia un usuario a un estacion",
+            description = "Asocia un usuario a un estacion en la base de datos, Insertando los detalles de un usuario asociado a un estacion en la base de datos.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -60,13 +60,13 @@ public class UsuarioEstacionController {
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
-    @PostMapping("/crearUsuarioHibernadero")
+    @PostMapping("/crearUsuarioEstacion")
     public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero) {
         return usuarioEstacionService.crearUsuarioHibernadero(idUsuario, idHibernadero);
     }
 
-    @Operation(summary = "Elimina un usuarioHibernadero",
-            description = "Elimina un usuarioHibernadero en la base de datos, Eliminando los detalles de un usuario asociado a un hibernadero en la base de datos.")
+    @Operation(summary = "Elimina un usuarioEstacion",
+            description = "Elimina un usuarioEstacion en la base de datos, Eliminando los detalles de un usuario asociado a un estacion en la base de datos.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -75,13 +75,13 @@ public class UsuarioEstacionController {
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
-    @DeleteMapping("/borrarUsuarioHibernadero")
+    @DeleteMapping("/borrarUsuarioEstacion")
     public ResponseEntity<?> borrarUsuarioHibernadero(String id) {
         return usuarioEstacionService.borrarUsuarioHibernadero(id);
     }
 
-    @Operation(summary = "Buscar los hibernaderos asociados a un usuario",
-            description = "Obtiene los datos de los hibernaderos asociados a un usuario en especifico por su id, Consulta detalles de los hibernaderos asociados a un usuario en especifico.")
+    @Operation(summary = "Buscar los estaciones asociados a un usuario",
+            description = "Obtiene los datos de las estaciones asociados a un usuario en especifico por su id, Consulta detalles de las estaciones asociados a un usuario en especifico.")
     @ApiResponses(value = {
 
                 @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -95,8 +95,8 @@ public class UsuarioEstacionController {
         return usuarioEstacionService.buscarPorUsuario(idUsuario);
     }
 
-    @Operation(summary = "Buscar los usuarios asociados a un hibernadero",
-            description = "Obtiene los datos de los usuarios asociados a un hibernadero en especifico por su id, Consulta detalles de los usuarios asociados a un hibernadero en especifico.")
+    @Operation(summary = "Buscar los usuarios asociados a un estacion",
+            description = "Obtiene los datos de los usuarios asociados a un estacion en especifico por su id, Consulta detalles de los usuarios asociados a un estacion en especifico.")
     @ApiResponses(value = {
 
                 @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -105,9 +105,24 @@ public class UsuarioEstacionController {
                 @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
-    @GetMapping("/buscarPorHibernadero")
+    @GetMapping("/buscarPorEstacion")
     public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
         return usuarioEstacionService.buscarPorHibernadero(idHibernadero);
+    }
+
+    @Operation(summary = "Buscar los usuarios asociados a un estacion",
+            description = "Obtiene los datos de los usuarios asociados a un estacion en especifico por su id, Consulta detalles de los usuarios asociados a un estacion en especifico.")
+    @ApiResponses(value = {
+
+            @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioEstacion.class))}),
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                    examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @GetMapping("/buscarUsuarioSinInvernadero")
+    public ResponseEntity<?> buscarUsuarioSinInvernadero(String idHibernadero) {
+        return usuarioEstacionService.buscarUsuarioSinInvernadero(idHibernadero);
     }
 
 }

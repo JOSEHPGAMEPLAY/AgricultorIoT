@@ -28,9 +28,6 @@ public class Formulario {
     @Field(name = "observacion")
     private String observacion;
 
-    @Field(name = "estado")
-    private String estado;
-
     @Field(name = "clave")
     private String clave;
 

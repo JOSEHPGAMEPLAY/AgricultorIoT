@@ -45,7 +45,7 @@ public class UsuarioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscar")
-    public ResponseEntity<?> buscar(String id) {
+    public ResponseEntity<?> buscar(@RequestParam String id) {
         return usuarioService.buscar(id);
     }
 
@@ -60,8 +60,7 @@ public class UsuarioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PutMapping("/actualizar")
-    public ResponseEntity<?> actualizar(Usuario usuario) {
-        System.out.println("usuario: "+usuario.toString());
+    public ResponseEntity<?> actualizar(@RequestBody Usuario usuario) {
         return usuarioService.actualizar(usuario);
     }
 
@@ -77,7 +76,7 @@ public class UsuarioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @DeleteMapping("/eliminar")
-    public ResponseEntity<?> eliminar(String id) {
+    public ResponseEntity<?> eliminar(@RequestParam String id) {
         return usuarioService.eliminar(id);
     }
 

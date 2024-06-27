@@ -1,6 +1,7 @@
 package iser.apiOrion.serviceImplement;
 
 
+import iser.apiOrion.auth.serviceImpl.JwtTokenProvider;
 import iser.apiOrion.collection.Formulario;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.email.service.EmailService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static iser.apiOrion.constant.messageConstant.buildMessage;
 import static iser.apiOrion.email.EmailConstant.formularioRegistrado;
 import static iser.apiOrion.email.EmailConstant.usuarioAceptado;
 
@@ -37,7 +39,7 @@ public class FormularioServiceImpl implements FormularioService {
         try {
             return ResponseEntity.ok(formularioRepository.findAll());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al buscar los formularios");
+            return ResponseEntity.badRequest().body(buildMessage("Error al buscar los formularios"));
         }
     }
 
@@ -51,7 +53,7 @@ public class FormularioServiceImpl implements FormularioService {
         try {
             return ResponseEntity.ok(formularioRepository.findById(id));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al buscar el formulario");
+            return ResponseEntity.badRequest().body(buildMessage("Error al buscar el formulario"));
         }
     }
 
@@ -65,11 +67,11 @@ public class FormularioServiceImpl implements FormularioService {
         try {
             Optional<Formulario> formularioOptional = formularioRepository.findById(formulario.getId());
             if (formularioOptional.isEmpty()) {
-                return ResponseEntity.badRequest().body("El formulario no existe");
+                return ResponseEntity.badRequest().body(buildMessage("El formulario no existe"));
             }
             return ResponseEntity.ok(formularioRepository.save(formulario));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al actualizar el formulario");
+            return ResponseEntity.badRequest().body(buildMessage("Error al actualizar el formulario"));
         }
     }
 
@@ -83,10 +85,10 @@ public class FormularioServiceImpl implements FormularioService {
         try {
             Optional<Formulario> formularioOptional = formularioRepository.findById(id);
             if (formularioOptional.isEmpty()) {
-                return ResponseEntity.badRequest().body("El formulario no existe");
+                return ResponseEntity.badRequest().body(buildMessage("El formulario no existe"));
             }
             formularioRepository.deleteById(id);
-            return ResponseEntity.ok("Formulario eliminado");
+            return ResponseEntity.ok(buildMessage("Formulario eliminado"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al borrar el formulario");
         }
@@ -122,20 +124,19 @@ public class FormularioServiceImpl implements FormularioService {
         try {
             Optional<Formulario> formularioOptional = formularioRepository.findById(idFormulario);
             if (formularioOptional.isEmpty()) {
-                return ResponseEntity.badRequest().body("El formulario no existe");
+                return ResponseEntity.badRequest().body(buildMessage("El formulario no existe"));
             }
             Formulario formulario = formularioOptional.get();
-            formulario.setEstado("ACEPTADO");
             Usuario usuario = new Usuario();
             usuario.setUsuario(formulario.getUsuario());
-            usuario.setClave(formulario.getClave());
+            usuario.setClave(JwtTokenProvider.passwordEncoder(formulario.getClave()));
             usuario.setNombres(formulario.getNombres());
             usuario.setEmail(formulario.getEmail());
             Usuario usuarioGuardado = usuarioRepository.save(usuario);
             emailService.sendMail(new String[]{usuario.getEmail()}, "Usuario Aceptado", usuarioAceptado());
             return ResponseEntity.ok(usuarioGuardado);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error al aceptar el usuario");
+            return ResponseEntity.badRequest().body(buildMessage("Error al aceptar el usuario"));
         }
     }
 }

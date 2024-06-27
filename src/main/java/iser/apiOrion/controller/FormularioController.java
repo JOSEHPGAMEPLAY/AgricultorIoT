@@ -47,7 +47,7 @@ public class FormularioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(Formulario formulario){
+    public ResponseEntity<?> crear(@RequestBody Formulario formulario){
         return formularioService.crear(formulario);
     }
 
@@ -62,7 +62,7 @@ public class FormularioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @DeleteMapping("/borrar")
-    public ResponseEntity<?> borrar(String id){
+    public ResponseEntity<?> borrar(@RequestParam String id){
         return formularioService.borrar(id);
     }
 
@@ -77,7 +77,7 @@ public class FormularioController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/obtenerPorId")
-    public ResponseEntity<?> obtenerPorId(String id){
+    public ResponseEntity<?> obtenerPorId(@RequestParam String id){
         return formularioService.buscarPorId(id);
     }
 
@@ -92,7 +92,7 @@ public class FormularioController {
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PutMapping("/actualizar")
-    public ResponseEntity<?> actualizar(Formulario formulario){
+    public ResponseEntity<?> actualizar(@RequestBody Formulario formulario){
         return formularioService.actualizar(formulario);
     }
 

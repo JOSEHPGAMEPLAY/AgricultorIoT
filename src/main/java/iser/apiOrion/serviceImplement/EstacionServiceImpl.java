@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static iser.apiOrion.constant.messageConstant.buildMessage;
+
 @Service
 public class EstacionServiceImpl implements EstacionService {
 
@@ -142,14 +144,12 @@ public class EstacionServiceImpl implements EstacionService {
     @Override
     public ResponseEntity<?> eliminar(String id) {
         try {
-            System.out.println("id: "+id);
             Optional<Estacion> estacion = estacionRepository.findById(id);
             if (estacion.isEmpty()) {
-                System.out.println("No se encontro la estacion");
                 return ResponseEntity.noContent().build();
             }
             estacionRepository.deleteById(estacion.get().getId());
-            return ResponseEntity.ok().body("Hibernadero eliminado");
+            return ResponseEntity.ok().body(buildMessage("Estacion eliminada"));
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
             return ResponseEntity.badRequest().build();

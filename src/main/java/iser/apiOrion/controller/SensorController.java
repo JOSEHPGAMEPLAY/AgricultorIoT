@@ -45,7 +45,7 @@ public class SensorController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/obtenerPorId")
-    public ResponseEntity<?> obtenerPorId(String id){
+    public ResponseEntity<?> obtenerPorId(@RequestParam String id){
         return sensorService.buscarPorId(id);
     }
 
@@ -60,7 +60,7 @@ public class SensorController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/crearSensor")
-    public ResponseEntity<?> crearSensor(Sensor sensor){
+    public ResponseEntity<?> crearSensor(@RequestBody Sensor sensor){
         return sensorService.crearSensor(sensor);
     }
 
@@ -75,7 +75,7 @@ public class SensorController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @DeleteMapping("/borrarSensor")
-    public ResponseEntity<?> borrarSensor(String id){
+    public ResponseEntity<?> borrarSensor(@RequestParam String id){
         return sensorService.borrarSensor(id);
     }
 
@@ -90,7 +90,7 @@ public class SensorController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/obtenerPorHibernadero")
-    public ResponseEntity<?> obtenerPorHibernadero(String idHibernadero){
+    public ResponseEntity<?> obtenerPorHibernadero(@RequestParam String idHibernadero){
         return sensorService.buscarPorHibernadero(idHibernadero);
     }
 

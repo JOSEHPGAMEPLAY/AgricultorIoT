@@ -16,5 +16,7 @@ public interface UsuarioEstacionService {
 
     ResponseEntity<?> buscarPorHibernadero(String idHibernadero);
 
+    ResponseEntity<?> buscarUsuarioSinInvernadero(String idHibernadero);
+
 
 }

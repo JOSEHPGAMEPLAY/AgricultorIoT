@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static iser.apiOrion.constant.messageConstant.buildMessage;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -48,8 +50,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuario.getId());
             if(usuarioOptional.isEmpty()){
-                return ResponseEntity.badRequest().body("Usuario no encontrado.");
+                return ResponseEntity.badRequest().body(buildMessage("Usuario no encontrado."));
             }
+            String clave = JwtTokenProvider.passwordEncoder(usuario.getClave());
+            usuario.setClave(clave);
             usuarioRepository.save(usuario);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
@@ -68,7 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         try {
             Optional<Usuario> usuario = usuarioRepository.findById(id);
             if(usuario.isEmpty()){
-                return ResponseEntity.badRequest().body("Usuario no encontrado.");
+                return ResponseEntity.badRequest().body(buildMessage("Usuario no encontrado."));
             }
             usuarioRepository.deleteById(id);
             return ResponseEntity.ok().build();
