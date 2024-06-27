@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.collection.UsuarioEstacion;
 import iser.apiOrion.service.UsuarioEstacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class UsuarioEstacionController {
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                    content = { @Content(mediaType = "application/json",
+                    content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = UsuarioEstacion.class)))}),
-            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarEstacionesUsuario")
@@ -40,9 +41,9 @@ public class UsuarioEstacionController {
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                    content = { @Content(mediaType = "application/json",
+                    content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UsuarioEstacion.class))}),
-            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarPorId")
@@ -55,9 +56,9 @@ public class UsuarioEstacionController {
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                    content = { @Content(mediaType = "application/json",
+                    content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = UsuarioEstacion.class))}),
-            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/crearUsuarioEstacion")
@@ -70,9 +71,9 @@ public class UsuarioEstacionController {
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                    content = { @Content(mediaType = "application/json",
+                    content = {@Content(mediaType = "application/json",
                             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"operacion exitosa\"}"))}),
-            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @DeleteMapping("/borrarUsuarioEstacion")
@@ -84,11 +85,11 @@ public class UsuarioEstacionController {
             description = "Obtiene los datos de las estaciones asociados a un usuario en especifico por su id, Consulta detalles de las estaciones asociados a un usuario en especifico.")
     @ApiResponses(value = {
 
-                @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                        content = { @Content(mediaType = "application/json",
-                                schema = @Schema(implementation = UsuarioEstacion.class))}),
-                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
-                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+            @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioEstacion.class))}),
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
+                    examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarPorUsuario")
     public ResponseEntity<?> buscarPorUsuario(String idUsuario) {
@@ -99,25 +100,25 @@ public class UsuarioEstacionController {
             description = "Obtiene los datos de los usuarios asociados a un estacion en especifico por su id, Consulta detalles de los usuarios asociados a un estacion en especifico.")
     @ApiResponses(value = {
 
-                @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                        content = { @Content(mediaType = "application/json",
-                                schema = @Schema(implementation = UsuarioEstacion.class))}),
-                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
-                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+            @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UsuarioEstacion.class))}),
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
+                    examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarPorEstacion")
     public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
         return usuarioEstacionService.buscarPorHibernadero(idHibernadero);
     }
 
-    @Operation(summary = "Buscar los usuarios asociados a un estacion",
-            description = "Obtiene los datos de los usuarios asociados a un estacion en especifico por su id, Consulta detalles de los usuarios asociados a un estacion en especifico.")
+    @Operation(summary = "Buscar los usuarios no asociados a un estacion",
+            description = "Obtiene los datos de los usuarios no asociados a un estacion en especifico por su id, Consulta detalles de los usuarios no asociados a un estacion en especifico.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UsuarioEstacion.class))}),
-            @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                    content = {@Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Usuario.class)))}),
+            @ApiResponse(responseCode = "400", description = "peticion fallida", content = {@io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarUsuarioSinInvernadero")
