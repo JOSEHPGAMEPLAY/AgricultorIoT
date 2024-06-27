@@ -25,13 +25,13 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
 
 
     /**
-     * Repositorio de usuario hibernadero
+     * Repositorio de usuario estacion
      */
     @Autowired
     UsuarioEstacionRepository usuarioEstacionRepository;
 
     /**
-     * Repositorio de hibernadero
+     * Repositorio de una estacion
      */
     @Autowired
     EstacionRepository estacionRepository;
@@ -62,7 +62,7 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
                 return ResponseEntity.noContent().build();
             }
 
-            List<String> idHibernaderos = usuarioEstacions.stream().map(UsuarioEstacion::getIdHibernadero).toList();
+            List<String> idHibernaderos = usuarioEstacions.stream().map(UsuarioEstacion::getIdEstacion).toList();
 
             List<Estacion> hibernaderos = estacionRepository.findAllById(idHibernaderos);
 
@@ -78,8 +78,8 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     }
 
     /**
-     * Metodo que permite obtener todos los usuarios de un hibernadero
-     * @param id id del hibernadero
+     * Metodo que permite obtener todos los usuarios de una estacion
+     * @param id id de la estacion
      * @return lista de usuarios
      */
     @Override
@@ -90,10 +90,10 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
                 return ResponseEntity.noContent().build();
             }
             UsuarioEstacionDTO usuarioEstacionDTO = new UsuarioEstacionDTO();
-            Estacion estacion = estacionRepository.findById(usuarioEstacion.get().getIdHibernadero()).get();
+            Estacion estacion = estacionRepository.findById(usuarioEstacion.get().getIdEstacion()).get();
             usuarioEstacionDTO.setId(usuarioEstacion.get().getId());
             usuarioEstacionDTO.setIdUsuario(usuarioEstacion.get().getIdUsuario());
-            usuarioEstacionDTO.setIdHibernadero(usuarioEstacion.get().getIdHibernadero());
+            usuarioEstacionDTO.setIdEstacion(usuarioEstacion.get().getIdEstacion());
             usuarioEstacionDTO.setCiudad(estacion.getCiudad());
             usuarioEstacionDTO.setDepartamento(estacion.getDepartamento());
             usuarioEstacionDTO.setDetalles(estacion.getDetalles());
@@ -103,7 +103,7 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
             usuarioEstacionDTO.setNombre(estacion.getNombre());
             usuarioEstacionDTO.setImagen(estacion.getImagen());
             usuarioEstacionDTO.setNombreTipoCultivo(tipoCultivoRepository.findById(estacion.getIdTipoCultivo()).get().getNombre());
-            usuarioEstacionDTO.setNumero_Asociados(usuarioEstacionRepository.findByIdHibernadero(estacion.getId()).size());
+            usuarioEstacionDTO.setNumero_Asociados(usuarioEstacionRepository.findByIdEstacion(estacion.getId()).size());
             return ResponseEntity.ok(usuarioEstacionDTO);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
@@ -112,17 +112,17 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     }
 
     /**
-     * Metodo que permite crear un usuario hibernadero
+     * Metodo que permite crear un usuario estacion
      * @param idUsuario id del usuario
-     * @param idHibernadero id del hibernadero
-     * @return usuario hibernadero creado
+     * @param idEstacion id de la estacion
+     * @return usuario estacion creado
      */
     @Override
-    public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero) {
+    public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idEstacion) {
         try {
             UsuarioEstacion usuarioEstacion = new UsuarioEstacion();
             usuarioEstacion.setIdUsuario(idUsuario);
-            usuarioEstacion.setIdHibernadero(idHibernadero);
+            usuarioEstacion.setIdEstacion(idEstacion);
             UsuarioEstacion usuarioEstacionGuardado = usuarioEstacionRepository.save(usuarioEstacion);
             return ResponseEntity.ok(usuarioEstacionGuardado);
         } catch (Exception e) {
@@ -132,15 +132,15 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     }
 
     /**
-     * Metodo que permite borrar un usuario hibernadero
-     * @param id id del usuario hibernadero
+     * Metodo que permite borrar un usuario estacion
+     * @param id id del usuario estacion
      * @return mensaje de confirmacion
      */
     @Override
     public ResponseEntity<?> borrarUsuarioHibernadero(String id) {
         try {
             usuarioEstacionRepository.deleteById(id);
-            return ResponseEntity.ok(buildMessage("Usuario Hibernadero borrado"));
+            return ResponseEntity.ok(buildMessage("Usuario estacion borrado"));
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
             return ResponseEntity.badRequest().build();
@@ -158,7 +158,7 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
             List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdUsuario(idUsuario);
             List<EstacionDTO> estaciones = new ArrayList<>();
             for (UsuarioEstacion usuarioEstacion : usuarioEstacions) {
-                Optional<Estacion> estacionOptional = estacionRepository.findById(usuarioEstacion.getIdHibernadero());
+                Optional<Estacion> estacionOptional = estacionRepository.findById(usuarioEstacion.getIdEstacion());
                 if (estacionOptional.isEmpty()) {
                     continue;
                 }
@@ -174,7 +174,7 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
                 estacionDTO.setNombre(estacion.getNombre());
                 estacionDTO.setImagen(estacion.getImagen());
                 estacionDTO.setDescripcionTipoCultivo(tipoCultivoRepository.findById(estacion.getIdTipoCultivo()).get().getNombre());
-                estacionDTO.setNumero_Asociados(usuarioEstacionRepository.findByIdHibernadero(estacion.getId()).size());
+                estacionDTO.setNumero_Asociados(usuarioEstacionRepository.findByIdEstacion(estacion.getId()).size());
                 estaciones.add(estacionDTO);
             }
 
@@ -186,14 +186,14 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     }
 
     /**
-     * Metodo que permite obtener los usuarios de un hibernadero
-     * @param idHibernadero id del hibernadero
+     * Metodo que permite obtener los usuarios de una estacion
+     * @param idEstacion id de la estacion
      * @return lista de usuarios
      */
     @Override
-    public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
+    public ResponseEntity<?> buscarPorHibernadero(String idEstacion) {
         try {
-            List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdHibernadero(idHibernadero);
+            List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdEstacion(idEstacion);
             return ResponseEntity.ok(usuarioEstacions);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
@@ -202,15 +202,15 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     }
 
     /**
-     * Metodo que permite obtener los usuarios que no estan asociados a un hibernadero
-     * @param idHibernadero id del hibernadero
+     * Metodo que permite obtener los usuarios que no estan asociados a una estacion
+     * @param idEstacion id de la estacion
      * @return lista de usuarios
      */
     @Override
-    public ResponseEntity<?> buscarUsuarioSinInvernadero(String idHibernadero) {
+    public ResponseEntity<?> buscarUsuarioSinInvernadero(String idEstacion) {
         try {
             List<Usuario> usuariosList = usuarioRepository.findAll();
-            List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdHibernadero(idHibernadero);
+            List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdEstacion(idEstacion);
             for (UsuarioEstacion usuarioEstacion : usuarioEstacions) {
                 Optional<Usuario> usuario = usuarioRepository.findById(usuarioEstacion.getIdUsuario());
                 if (usuario.isEmpty()) {

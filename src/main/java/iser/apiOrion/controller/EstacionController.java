@@ -37,8 +37,8 @@ public class EstacionController {
         return hibernaderoService.buscarTodos();
     }
 
-    @Operation(summary = "Busca un hibernadero por su id",
-            description = "Obtiene los datos de un hibernadero en especifico por su id, Consulta detalles de un hibernadero en especifico.")
+    @Operation(summary = "Busca una estacion por su id",
+            description = "Obtiene los datos de una estacion en especifico por su id, Consulta detalles de una estacion en especifico.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -52,8 +52,8 @@ public class EstacionController {
         return hibernaderoService.buscar(id);
     }
 
-    @Operation(summary = "Insertar un hibernadero",
-            description = "Inserta un hibernadero en la base de datos, Insertando los detalles de un hibernadero en la base de datos. \n Nota: el campo de imagen debe ir un base 64.")
+    @Operation(summary = "Insertar una estacion",
+            description = "Inserta una estacion en la base de datos, Insertando los detalles de una estacion en la base de datos. \n Nota: el campo de imagen debe ir un base 64.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -67,8 +67,8 @@ public class EstacionController {
         return hibernaderoService.insertar(object);
     }
 
-    @Operation(summary = "Actualizar un hibernadero",
-            description = "Actualiza los datos de un hibernadero en la base de datos, Actualizando los detalles de un hibernadero en la base de datos.")
+    @Operation(summary = "Actualizar una estacion",
+            description = "Actualiza los datos de una estacion en la base de datos, Actualizando los detalles de una estacion en la base de datos.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -82,8 +82,8 @@ public class EstacionController {
         return hibernaderoService.actualizar(object);
     }
 
-    @Operation(summary = "Eliminar un hibernadero",
-            description = "Elimina un hibernadero en la base de datos, Eliminando los detalles de un hibernadero en la base de datos.")
+    @Operation(summary = "Eliminar una estacion",
+            description = "Elimina una estacion en la base de datos, Eliminando los detalles de una estacion en la base de datos.")
     @ApiResponses(value = {
 
                 @ApiResponse(responseCode = "200", description = "operacion exitosa",

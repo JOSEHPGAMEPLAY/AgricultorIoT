@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface SensorRepository extends MongoRepository<Sensor, String> {
 
-    List<Sensor> findByidHibernadero(String idHibernadero);
+    List<Sensor> findByIdEstacion(String idEstacion);
 
 }

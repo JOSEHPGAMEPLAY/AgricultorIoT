@@ -79,8 +79,8 @@ public class SensorController {
         return sensorService.borrarSensor(id);
     }
 
-    @Operation(summary = "Obtener un sensor por su hibernadero",
-            description = "Obtiene los datos de un sensor en especifico por su hibernadero, Consulta detalles de un sensor en especifico.")
+    @Operation(summary = "Obtener un sensor por su estacion",
+            description = "Obtiene los datos de un sensor en especifico por su estacion, Consulta detalles de un sensor en especifico.")
     @ApiResponses(value = {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
@@ -90,8 +90,8 @@ public class SensorController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/obtenerPorEstacion")
-    public ResponseEntity<?> obtenerPorEstacion(@RequestParam String idHibernadero){
-        return sensorService.buscarPorEstacion(idHibernadero);
+    public ResponseEntity<?> obtenerPorEstacion(@RequestParam String idEstacion){
+        return sensorService.buscarPorEstacion(idEstacion);
     }
 
 }

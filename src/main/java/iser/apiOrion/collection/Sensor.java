@@ -13,8 +13,8 @@ public class Sensor {
     @Id
     private String id;
 
-    @Field(name = "id_hibernadero")
-    private String idHibernadero;
+    @Field(name = "idEstacion")
+    private String idEstacion;
 
     @Field(name = "nombre")
     private String nombre;

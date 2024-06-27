@@ -60,7 +60,7 @@ public class EstacionServiceImpl implements EstacionService {
                 estacionDTO.setIdTipoCultivo(estacion.getIdTipoCultivo());
                 descripcionTipoCultivo = tipoCultivoRepository.findById(estacion.getIdTipoCultivo()).get().getNombre();
                 estacionDTO.setDescripcionTipoCultivo((!Objects.equals(descripcionTipoCultivo, "") && descripcionTipoCultivo != null) ? descripcionTipoCultivo : "No se encontro el tipo de cultivo");
-                estacionDTO.setNumero_Asociados(usuarioEstacionRepository.countByIdHibernadero(estacion.getId()));
+                estacionDTO.setNumero_Asociados(usuarioEstacionRepository.countByIdEstacion(estacion.getId()));
                 estaciones.add(estacionDTO);
             }
 
@@ -94,7 +94,7 @@ public class EstacionServiceImpl implements EstacionService {
             estacionDTO.setEstado(estacion.get().getEstado());
             estacionDTO.setIdTipoCultivo(estacion.get().getIdTipoCultivo());
             estacionDTO.setDescripcionTipoCultivo(tipoCultivoRepository.findById(estacion.get().getIdTipoCultivo()).get().getNombre());
-            estacionDTO.setNumero_Asociados(usuarioEstacionRepository.countByIdHibernadero(estacion.get().getId()));
+            estacionDTO.setNumero_Asociados(usuarioEstacionRepository.countByIdEstacion(estacion.get().getId()));
             return ResponseEntity.ok().body(estacionDTO);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());

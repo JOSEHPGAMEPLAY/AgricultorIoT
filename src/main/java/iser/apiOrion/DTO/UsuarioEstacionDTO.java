@@ -6,7 +6,7 @@ import lombok.Data;
 public class UsuarioEstacionDTO {
 
     private String id;
-    private String idHibernadero;
+    private String idEstacion;
     private String idUsuario;
     private String imagen;
     private String ciudad;

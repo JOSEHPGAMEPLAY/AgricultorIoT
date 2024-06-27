@@ -9,7 +9,7 @@ public interface UsuarioEstacionRepository extends MongoRepository<UsuarioEstaci
 
     List<UsuarioEstacion> findByIdUsuario(String idUsuario);
 
-    List<UsuarioEstacion> findByIdHibernadero(String idHibernadero);
+    List<UsuarioEstacion> findByIdEstacion(String idEstacion);
 
-    int countByIdHibernadero(String idHibernadero);
+    int countByIdEstacion(String idEstacion);
 }

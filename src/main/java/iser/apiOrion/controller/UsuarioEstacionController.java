@@ -62,8 +62,8 @@ public class UsuarioEstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/crearUsuarioEstacion")
-    public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero) {
-        return usuarioEstacionService.crearUsuarioHibernadero(idUsuario, idHibernadero);
+    public ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idEstacion) {
+        return usuarioEstacionService.crearUsuarioHibernadero(idUsuario, idEstacion);
     }
 
     @Operation(summary = "Elimina un usuarioEstacion",
@@ -107,8 +107,8 @@ public class UsuarioEstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarPorEstacion")
-    public ResponseEntity<?> buscarPorHibernadero(String idHibernadero) {
-        return usuarioEstacionService.buscarPorHibernadero(idHibernadero);
+    public ResponseEntity<?> buscarPorHibernadero(String idEstacion) {
+        return usuarioEstacionService.buscarPorHibernadero(idEstacion);
     }
 
     @Operation(summary = "Buscar los usuarios no asociados a un estacion",
@@ -122,8 +122,8 @@ public class UsuarioEstacionController {
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @GetMapping("/buscarUsuarioSinInvernadero")
-    public ResponseEntity<?> buscarUsuarioSinInvernadero(String idHibernadero) {
-        return usuarioEstacionService.buscarUsuarioSinInvernadero(idHibernadero);
+    public ResponseEntity<?> buscarUsuarioSinInvernadero(String idEstacion) {
+        return usuarioEstacionService.buscarUsuarioSinInvernadero(idEstacion);
     }
 
 }

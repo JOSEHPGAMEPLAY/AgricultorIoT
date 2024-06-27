@@ -17,7 +17,7 @@ public interface SensorService {
 
     ResponseEntity<?> borrarSensor(String id);
 
-    ResponseEntity<?> buscarPorEstacion(String idHibernadero);
+    ResponseEntity<?> buscarPorEstacion(String idEstacion);
 
 
 }

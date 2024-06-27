@@ -8,15 +8,15 @@ public interface UsuarioEstacionService {
 
     ResponseEntity<?> buscarPorId(String id);
 
-    ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idHibernadero);
+    ResponseEntity<?> crearUsuarioHibernadero(String idUsuario, String idEstacion);
 
     ResponseEntity<?> borrarUsuarioHibernadero(String id);
 
     ResponseEntity<?> buscarPorUsuario(String idUsuario);
 
-    ResponseEntity<?> buscarPorHibernadero(String idHibernadero);
+    ResponseEntity<?> buscarPorHibernadero(String idEstacion);
 
-    ResponseEntity<?> buscarUsuarioSinInvernadero(String idHibernadero);
+    ResponseEntity<?> buscarUsuarioSinInvernadero(String idEstacion);
 
 
 }

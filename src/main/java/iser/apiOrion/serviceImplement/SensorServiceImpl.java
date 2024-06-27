@@ -47,11 +47,11 @@ public class SensorServiceImpl implements SensorService {
             for(Sensor sensor : sensors){
                 SensorDTO sensorDTO = new SensorDTO();
                 sensorDTO.setId(sensor.getId());
-                sensorDTO.setIdHibernadero(sensor.getIdHibernadero());
+                sensorDTO.setIdEstacion(sensor.getIdEstacion());
                 sensorDTO.setNombre(sensor.getNombre());
                 sensorDTO.setDescripcion(sensor.getDescripcion());
                 sensorDTO.setConfig(sensor.isConfig());
-                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdHibernadero());
+                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
                 ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
                 sensorDTO.setUbicacion(ubicacion);
                 sensorDTOList.add(sensorDTO);
@@ -80,11 +80,11 @@ public class SensorServiceImpl implements SensorService {
 
             SensorDTO sensorDTO = new SensorDTO();
             sensorDTO.setId(sensor.get().getId());
-            sensorDTO.setIdHibernadero(sensor.get().getIdHibernadero());
+            sensorDTO.setIdEstacion(sensor.get().getIdEstacion());
             sensorDTO.setNombre(sensor.get().getNombre());
             sensorDTO.setDescripcion(sensor.get().getDescripcion());
             sensorDTO.setConfig(sensor.get().isConfig());
-            Optional<Estacion> estacion = estacionRepository.findById(sensor.get().getIdHibernadero());
+            Optional<Estacion> estacion = estacionRepository.findById(sensor.get().getIdEstacion());
             String ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
             sensorDTO.setUbicacion(ubicacion);
 
@@ -147,25 +147,25 @@ public class SensorServiceImpl implements SensorService {
     }
 
     /**
-     * Metodo que permite obtener los sensores de un hibernadero
+     * Metodo que permite obtener los sensores de una estacion
      *
-     * @param idHibernadero id del hibernadero
+     * @param idEstacion id de la estacion
      * @return lista de sensores
      */
     @Override
-    public ResponseEntity<?> buscarPorEstacion(String idHibernadero) {
+    public ResponseEntity<?> buscarPorEstacion(String idEstacion) {
         try {
-            List<Sensor> sensors = sensorRepository.findByidHibernadero(idHibernadero);
+            List<Sensor> sensors = sensorRepository.findByIdEstacion(idEstacion);
             List<SensorDTO> sensorDTOList = new ArrayList<>();
             String ubicacion = "";
             for(Sensor sensor : sensors){
                 SensorDTO sensorDTO = new SensorDTO();
                 sensorDTO.setId(sensor.getId());
-                sensorDTO.setIdHibernadero(sensor.getIdHibernadero());
+                sensorDTO.setIdEstacion(sensor.getIdEstacion());
                 sensorDTO.setNombre(sensor.getNombre());
                 sensorDTO.setDescripcion(sensor.getDescripcion());
                 sensorDTO.setConfig(sensor.isConfig());
-                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdHibernadero());
+                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
                 ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
                 sensorDTO.setUbicacion(ubicacion);
                 sensorDTOList.add(sensorDTO);

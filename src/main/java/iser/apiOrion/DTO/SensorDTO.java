@@ -7,7 +7,7 @@ import lombok.Data;
 public class SensorDTO {
 
     private String id;
-    private String idHibernadero;
+    private String idEstacion;
     private String nombre;
     private String descripcion;
     private boolean config;
