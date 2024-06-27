@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import iser.apiOrion.collection.Hibernadero;
-import iser.apiOrion.service.HibernaderoService;
+import iser.apiOrion.collection.Estacion;
+import iser.apiOrion.service.EstacionService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/hibernadero")
 @CrossOrigin(origins = "*")
-public class HIbernaderoController {
+public class EstacionController {
 
     @Autowired
-    HibernaderoService hibernaderoService;
+    EstacionService hibernaderoService;
 
     @Operation(summary = "Buscar todos los datos de los hibernaderos",
             description = "Obtiene todos los datos de los hibernaderos registrados en la base de datos, Consulta detalles de los hibernaderos.")
@@ -28,7 +28,7 @@ public class HIbernaderoController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Hibernadero.class)))}),
+                            array = @ArraySchema(schema = @Schema(implementation = Estacion.class)))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
@@ -43,7 +43,7 @@ public class HIbernaderoController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Hibernadero.class))}),
+                            schema = @Schema(implementation = Estacion.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
@@ -58,12 +58,12 @@ public class HIbernaderoController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Hibernadero.class))}),
+                            schema = @Schema(implementation = Estacion.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/insertar")
-    public ResponseEntity<?> insertar(Hibernadero object) {
+    public ResponseEntity<?> insertar(Estacion object) {
         return hibernaderoService.insertar(object);
     }
 
@@ -73,12 +73,12 @@ public class HIbernaderoController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Hibernadero.class))}),
+                            schema = @Schema(implementation = Estacion.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PutMapping("/actualizar")
-    public ResponseEntity<?> actualizar(Hibernadero object) {
+    public ResponseEntity<?> actualizar(Estacion object) {
         return hibernaderoService.actualizar(object);
     }
 

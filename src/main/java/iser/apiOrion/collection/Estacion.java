@@ -2,14 +2,13 @@ package iser.apiOrion.collection;
 
 
 import lombok.Data;
-import org.springframework.aot.generate.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
-@Document(collection = "hibernadero")
-public class Hibernadero {
+@Document(collection = "estacion")
+public class Estacion {
 
     @Id
     private String id;

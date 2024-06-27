@@ -6,8 +6,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import iser.apiOrion.collection.Hibernadero;
-import iser.apiOrion.collection.Sensor;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

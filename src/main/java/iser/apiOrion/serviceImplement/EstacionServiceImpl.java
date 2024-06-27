@@ -1,9 +1,9 @@
 package iser.apiOrion.serviceImplement;
 
 
-import iser.apiOrion.collection.Hibernadero;
-import iser.apiOrion.repository.HibernaderoRepository;
-import iser.apiOrion.service.HibernaderoService;
+import iser.apiOrion.collection.Estacion;
+import iser.apiOrion.repository.EstacionRepository;
+import iser.apiOrion.service.EstacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class HibernaderoServiceImpl implements HibernaderoService {
+public class EstacionServiceImpl implements EstacionService {
 
     /**
      * Repositorio de hibernaderos
      */
     @Autowired
-    HibernaderoRepository hibernaderoRepository;
+    EstacionRepository estacionRepository;
 
     /**
      * Metodo que permite obtener todos los hibernaderos
@@ -27,7 +27,7 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     @Override
     public ResponseEntity<?> buscarTodos() {
         try {
-            List<Hibernadero> hibernaderos = hibernaderoRepository.findAll();
+            List<Estacion> hibernaderos = estacionRepository.findAll();
             if (hibernaderos.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
@@ -47,7 +47,7 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     @Override
     public ResponseEntity<?> buscar(String id) {
         try {
-            Optional<Hibernadero> hibernadero = hibernaderoRepository.findById(id);
+            Optional<Estacion> hibernadero = estacionRepository.findById(id);
             if (hibernadero.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
@@ -67,8 +67,8 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     @Override
     public ResponseEntity<?> insertar(Object object) {
         try {
-            Hibernadero hibernadero = (Hibernadero) object;
-            hibernaderoRepository.save(hibernadero);
+            Estacion hibernadero = (Estacion) object;
+            estacionRepository.save(hibernadero);
             return ResponseEntity.ok().body(hibernadero);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
@@ -84,8 +84,8 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     @Override
     public ResponseEntity<?> actualizar(Object object) {
         try {
-            Hibernadero hibernadero = (Hibernadero) object;
-            hibernaderoRepository.save(hibernadero);
+            Estacion hibernadero = (Estacion) object;
+            estacionRepository.save(hibernadero);
             return ResponseEntity.ok().body(hibernadero);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
@@ -102,13 +102,13 @@ public class HibernaderoServiceImpl implements HibernaderoService {
     public ResponseEntity<?> eliminar(String id) {
         try {
             System.out.println("id: "+id);
-            Optional<Hibernadero> hibernadero = hibernaderoRepository.findById(id);
+            Optional<Estacion> hibernadero = estacionRepository.findById(id);
             if (hibernadero.isEmpty()) {
                 System.out.println("No se encontro el hibernadero");
                 return ResponseEntity.noContent().build();
             }
             System.out.println("hibernadero: "+hibernadero.get());
-            hibernaderoRepository.deleteById(hibernadero.get().getId());
+            estacionRepository.deleteById(hibernadero.get().getId());
             return ResponseEntity.ok().body("Hibernadero eliminado");
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
