@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/tipoCultivo")
 public class TipoCultivoController {
 
+    /**
+     * Servicio de tipo cultivo
+     */
     @Autowired
     TipoCultivoService tipoCultivoService;
 

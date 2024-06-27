@@ -21,14 +21,25 @@ import static iser.apiOrion.constant.messageConstant.buildMessage;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-
+    /**
+     * Repositorio de usuarios
+     */
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    /**
+     * Servicio de jwt
+     */
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-
+    /**
+     * Metodo que permite loguear un usuario
+     * @param loginDto datos del usuario
+     * @param response respuesta de la peticion
+     * @param request peticion
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> login(LoginDto loginDto, HttpServletResponse response, HttpServletRequest request) {
         try {
@@ -49,6 +60,12 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    /**
+     * Metodo que permite registrar un usuario
+     * @param usuario usuario a registrar
+     * @param request peticion
+     * @return respuesta de la peticion
+     */
     @Override
     public ResponseEntity<?> register(Usuario usuario, HttpServletRequest request) {
         try {

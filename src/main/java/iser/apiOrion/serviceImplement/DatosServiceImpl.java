@@ -22,9 +22,15 @@ public class DatosServiceImpl implements DatosService {
     @Autowired
     DatosRepository datosRepository;
 
+    /**
+     * Repositorio de sensores
+     */
     @Autowired
     SensorRepository sensorRepository;
 
+    /**
+     * Servicio de jwt
+     */
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/validacion")
 public class ValidacionController {
 
+    /**
+     * Servicio de validacion
+     */
     @Autowired
     ValidacionService validacionService;
 

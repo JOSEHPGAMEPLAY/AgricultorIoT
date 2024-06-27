@@ -17,15 +17,32 @@ import java.util.Enumeration;
 @Service
 public class CustomFilter extends OncePerRequestFilter {
 
+    /**
+     * Proveedor de token JWT
+     */
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    /**
+     * URI de la solicitud para insertar datos
+     */
     @Value("${valida.insertar-datos.requestURI.igual-noToken:total-lock}")
     private String insertarDatosRequestURI;
 
+    /**
+     * Clave para validar los datos
+     */
     @Value("${clave.valida.datos:total-lock}")
     private String claveValidaDatos;
 
+    /**
+     * Metodo que permite filtrar las peticiones
+     * @param request peticion http
+     * @param response respuesta http
+     * @param chain cadena de filtros
+     * @throws IOException excepcion de entrada y salida
+     * @throws ServletException excepcion de servlet
+     */
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         //response.setHeader("Access-Control-Allow-Origin", "*");

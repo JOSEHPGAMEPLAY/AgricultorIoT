@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class EstacionController {
 
+    /**
+     * Servicio de hibernadero
+     */
     @Autowired
     EstacionService hibernaderoService;
 

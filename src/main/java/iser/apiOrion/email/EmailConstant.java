@@ -3,6 +3,11 @@ package iser.apiOrion.email;
 
 public class EmailConstant {
 
+    /**
+     * Metodo que retorna el contenido del correo de bienvenida
+     * @param nombre nombre del usuario
+     * @return contenido del correo
+     */
     public static String formularioRegistrado(String nombre) {
         StringBuilder content = new StringBuilder();
         content.append("<!DOCTYPE html>")
@@ -28,6 +33,10 @@ public class EmailConstant {
         return content.toString();
     }
 
+    /**
+     * Metodo que retorna el contenido del correo de usuario aceptado
+     * @return contenido del correo
+     */
     public static String usuarioAceptado() {
         StringBuilder content = new StringBuilder();
         content.append("<!DOCTYPE html>")

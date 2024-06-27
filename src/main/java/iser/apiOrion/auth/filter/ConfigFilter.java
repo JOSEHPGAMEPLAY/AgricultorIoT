@@ -8,9 +8,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigFilter {
 
+    /**
+     * Filtro personalizado
+     */
     @Autowired
     private CustomFilter customFilter;
 
+    /**
+     * Registra el filtro en la aplicacion
+     * @return filtro registrado
+     */
     @Bean
     public FilterRegistrationBean<CustomFilter> filterRegistrationBean() {
         FilterRegistrationBean<CustomFilter> registrationBean = new FilterRegistrationBean<>();

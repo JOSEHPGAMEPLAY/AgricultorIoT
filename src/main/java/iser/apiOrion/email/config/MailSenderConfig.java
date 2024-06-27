@@ -1,6 +1,7 @@
 package iser.apiOrion.email.config;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,6 +11,32 @@ import java.util.Properties;
 
 @Configuration
 public class MailSenderConfig {
+
+    @Value("${email.mail:null}")
+    String mail;
+
+    @Value("${email.password:null}")
+    String password;
+
+    @Value("${email.host:null}")
+    String host;
+
+    @Value("${email.port:0}")
+    int port;
+
+    @Value("${email.protocol:null}")
+    String protocol;
+
+    @Value("${email.auth:false}")
+    boolean auth;
+
+    @Value("${email.starttls:false}")
+    boolean starttls;
+
+    @Value("${email.debug:false}")
+    boolean debug;
+
+
     /**
      * javaMailSender :: gmail email server configuration
      * <p>
@@ -30,16 +57,16 @@ public class MailSenderConfig {
     public JavaMailSender javaMailSender() {
 
         JavaMailSenderImpl sender = new JavaMailSenderImpl();
-        sender.setHost("smtp.gmail.com");
-        sender.setPort(587);
-        sender.setUsername("envioc848@gmail.com");
-        sender.setPassword("gtfoglkiuqyvguly");
+        sender.setHost(host);
+        sender.setPort(port);
+        sender.setUsername(mail);
+        sender.setPassword(password);
 
         Properties props = sender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", true);
-        props.put("mail.smtp.starttls.enable", true);
-        props.put("mail.debug", true);
+        props.put("mail.transport.protocol", protocol);
+        props.put("mail.smtp.auth", auth);
+        props.put("mail.smtp.starttls.enable", starttls);
+        props.put("mail.debug", debug);
 
         return sender;
     }

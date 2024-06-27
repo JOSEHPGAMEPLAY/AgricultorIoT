@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/sensor")
 public class SensorController {
 
+    /**
+     * Servicio de sensor
+     */
     @Autowired
     private SensorService sensorService;
 

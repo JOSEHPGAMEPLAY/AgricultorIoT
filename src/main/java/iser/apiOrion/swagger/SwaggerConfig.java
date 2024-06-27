@@ -17,6 +17,11 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
 
+    /**
+     * Create api key scheme security scheme.
+     *
+     * @return the security scheme
+     */
     private SecurityScheme createAPIKeyScheme() {
         return new SecurityScheme().type(SecurityScheme.Type.HTTP)
                 .bearerFormat("JWT")

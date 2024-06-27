@@ -22,6 +22,9 @@ import java.util.Date;
 @RequestMapping("api/v1/datos")
 public class DatosController {
 
+    /**
+     * Servicio de datos
+     */
     @Autowired
     DatosService datosService;
 

@@ -27,9 +27,15 @@ public class EstacionServiceImpl implements EstacionService {
     @Autowired
     EstacionRepository estacionRepository;
 
+    /**
+     * Repositorio de tipos de cultivo
+     */
     @Autowired
     TipoCultivoRepository tipoCultivoRepository;
 
+    /**
+     * Repositorio de usuarios estacion
+     */
     @Autowired
     UsuarioEstacionRepository usuarioEstacionRepository;
 

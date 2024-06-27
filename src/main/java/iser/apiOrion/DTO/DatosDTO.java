@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class DatosDTO {
-
-    //idSensor
+    /**
+     * idSensor: Identificador del sensor
+     * valor: Valor del sensor
+     */
     private String idSensor;
-
-    //valor
     private String valor;
 
 }
