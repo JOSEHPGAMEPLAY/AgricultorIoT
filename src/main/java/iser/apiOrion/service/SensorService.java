@@ -19,5 +19,6 @@ public interface SensorService {
 
     ResponseEntity<?> buscarPorEstacion(String idEstacion);
 
+    ResponseEntity<?> buscarPorUsuario(String idUsuario);
 
 }

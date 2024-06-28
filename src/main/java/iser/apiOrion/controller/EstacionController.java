@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/estacion")
 @CrossOrigin(origins = "*")
@@ -101,5 +99,21 @@ public class EstacionController {
     public ResponseEntity<?> eliminar(String id) {
         return hibernaderoService.eliminar(id);
     }
+
+    @Operation(summary = "Buscar las estaciones asociadas a un usuario",
+            description = "Obtiene los datos de las estaciones asociadas a un usuario en especifico por su id, Consulta detalles de las estaciones asociadas a un usuario en especifico.")
+    @ApiResponses(value = {
+
+                @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                        content = { @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = Estacion.class))}),
+                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @GetMapping("/buscarEstacionesPropietario")
+    public ResponseEntity<?> buscarEstacionesPropietario(String idUsuario) {
+        return hibernaderoService.buscarEstacionesPropietario(idUsuario);
+    }
+
 
 }

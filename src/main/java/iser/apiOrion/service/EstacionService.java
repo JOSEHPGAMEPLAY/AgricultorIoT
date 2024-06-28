@@ -14,4 +14,5 @@ public interface EstacionService {
 
     public ResponseEntity<?> eliminar(String id);
 
+    public ResponseEntity<?> buscarEstacionesPropietario(String idUsuario);
 }

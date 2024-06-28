@@ -176,4 +176,38 @@ public class SensorServiceImpl implements SensorService {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+
+    /**
+     * Metodo que permite obtener los sensores asociados a un usuario
+     *
+     * @param idUsuario id del usuario
+     * @return lista de sensores
+     */
+    @Override
+    public ResponseEntity<?> buscarPorUsuario(String idUsuario) {
+        try {
+            List<Estacion> estaciones = estacionRepository.findAllByEncargado(idUsuario);
+            List<SensorDTO> sensorDTOList = new ArrayList<>();
+            String ubicacion = "";
+            for(Estacion estacion : estaciones){
+                List<Sensor> sensors = sensorRepository.findByIdEstacion(estacion.getId());
+                for(Sensor sensor : sensors){
+                    SensorDTO sensorDTO = new SensorDTO();
+                    sensorDTO.setId(sensor.getId());
+                    sensorDTO.setIdEstacion(sensor.getIdEstacion());
+                    sensorDTO.setNombre(sensor.getNombre());
+                    sensorDTO.setDescripcion(sensor.getDescripcion());
+                    sensorDTO.setConfig(sensor.isConfig());
+                    Optional<Estacion> estacion1 = estacionRepository.findById(sensor.getIdEstacion());
+                    ubicacion = estacion1.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                    sensorDTO.setUbicacion(ubicacion);
+                    sensorDTOList.add(sensorDTO);
+                }
+            }
+            return ResponseEntity.ok(sensorDTOList);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package iser.apiOrion.serviceImplement;
 
 import iser.apiOrion.DTO.EstacionDTO;
+import iser.apiOrion.DTO.UsuarioAsociadoDTO;
 import iser.apiOrion.DTO.UsuarioEstacionDTO;
 import iser.apiOrion.collection.Estacion;
 import iser.apiOrion.collection.Usuario;
@@ -194,7 +195,22 @@ public class UsuarionEstacionServiceImpl implements UsuarioEstacionService {
     public ResponseEntity<?> buscarPorHibernadero(String idEstacion) {
         try {
             List<UsuarioEstacion> usuarioEstacions = usuarioEstacionRepository.findByIdEstacion(idEstacion);
-            return ResponseEntity.ok(usuarioEstacions);
+            List<UsuarioAsociadoDTO> usuarioEstacionsDTO = new ArrayList<>();
+            for (UsuarioEstacion usuarioEstacion : usuarioEstacions) {
+                Optional<Usuario> usuario = usuarioRepository.findById(usuarioEstacion.getIdUsuario());
+                if (usuario.isEmpty()) {
+                    continue;
+                }
+                UsuarioAsociadoDTO usuarioAsociadoDTO = new UsuarioAsociadoDTO();
+                usuarioAsociadoDTO.setId(usuarioEstacion.getId());
+                usuarioAsociadoDTO.setIdUsuario(usuarioEstacion.getIdUsuario());
+                usuarioAsociadoDTO.setIdEstacion(usuarioEstacion.getIdEstacion());
+                usuarioAsociadoDTO.setUsuario(usuario.get().getUsuario());
+                usuarioEstacionsDTO.add(usuarioAsociadoDTO);
+            }
+
+
+            return ResponseEntity.ok(usuarioEstacionsDTO);
         } catch (Exception e) {
             System.out.println("Error: "+e.getMessage());
             return ResponseEntity.badRequest().build();

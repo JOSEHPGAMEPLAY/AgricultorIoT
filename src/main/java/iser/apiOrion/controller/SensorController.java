@@ -97,4 +97,20 @@ public class SensorController {
         return sensorService.buscarPorEstacion(idEstacion);
     }
 
+    @Operation(summary = "Buscar los sensores asociados a un usuario",
+            description = "Obtiene los datos de los sensores asociados a un usuario en especifico por su id, Consulta detalles de los sensores asociados a un usuario en especifico.")
+    @ApiResponses(value = {
+
+                @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                        content = { @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = Sensor.class))}),
+                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @GetMapping("/buscarPorUsuario")
+    public ResponseEntity<?> buscarPorUsuario(@RequestParam String idUsuario){
+        return sensorService.buscarPorUsuario(idUsuario);
+    }
+
+
 }

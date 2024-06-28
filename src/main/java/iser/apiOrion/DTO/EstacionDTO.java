@@ -24,6 +24,7 @@ public class EstacionDTO {
     private String departamento;
     private String nombre;
     private String encargado;
+    private String usuarioEncargado;
     private String detalles;
     private String estado;
     private String idTipoCultivo;
