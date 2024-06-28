@@ -52,6 +52,9 @@ public class UsuarioServiceImpl implements UsuarioService {
             if(usuarioOptional.isEmpty()){
                 return ResponseEntity.badRequest().body(buildMessage("Usuario no encontrado."));
             }
+            if(!usuario.getClave().equals("")){
+                return ResponseEntity.badRequest().body(buildMessage("La clave es necesaria para actualizar el usuario."));
+            }
             String clave = JwtTokenProvider.passwordEncoder(usuario.getClave());
             usuario.setClave(clave);
             usuarioRepository.save(usuario);

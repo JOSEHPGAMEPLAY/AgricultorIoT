@@ -67,7 +67,6 @@ public class UsuarioController {
         return usuarioService.actualizar(usuario);
     }
 
-    //eliminar
     @Operation(summary = "Eliminar un usuario",
             description = "Elimina los datos de un usuario en la base de datos, Eliminando los detalles de un usuario en la base de datos.")
     @ApiResponses(value = {
