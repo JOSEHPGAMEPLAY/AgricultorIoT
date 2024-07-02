@@ -112,5 +112,21 @@ public class SensorController {
         return sensorService.buscarPorUsuario(idUsuario);
     }
 
+    @Operation(summary = "Actualizar un sensor",
+            description = "Actualiza los datos de un sensor en la base de datos, Actualizando los detalles de un sensor en la base de datos.")
+    @ApiResponses(value = {
+
+                @ApiResponse(responseCode = "200", description = "operacion exitosa",
+                        content = { @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = Sensor.class))}),
+                @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
+                        examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
+    })
+    @PutMapping("/actualizar")
+    public ResponseEntity<?> actualizar(@RequestBody Sensor sensor){
+        return sensorService.actualizarSensor(sensor);
+    }
+
+
 
 }

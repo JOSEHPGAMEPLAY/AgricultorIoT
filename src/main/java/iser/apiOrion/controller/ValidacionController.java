@@ -6,7 +6,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.service.ValidacionService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,19 +38,21 @@ public class ValidacionController {
         return validacionService.crearCodigoValidacion(usuario);
     }
 
-    //validarCodigo
     @Operation(summary = "Validar un codigo de validacion",
             description = "Valida un codigo de validacion para un usuario en especifico, Validando un codigo de validacion para un usuario en especifico.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))}),
+                            schema = @Schema(implementation = Usuario.class))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PutMapping("/validarCodigo")
-    public ResponseEntity<?> validarCodigo(@RequestParam("usuario") String usuario, @RequestParam("codigo") String codigo) {
-        return validacionService.validarCodigoValidacion(usuario, codigo);
+    public ResponseEntity<?> validarCodigo(@RequestParam("usuario") String usuario,
+                                           @RequestParam("codigo") String codigo,
+                                           HttpServletResponse response,
+                                           HttpServletRequest request) {
+        return validacionService.validarCodigoValidacion(usuario, codigo, response, request);
     }
 
 }

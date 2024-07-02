@@ -41,9 +41,11 @@ public class SensorServiceImpl implements SensorService {
     @Override
     public ResponseEntity<?> buscarTodos() {
         try {
+            System.out.println("Buscando todos los sensores");
             List<Sensor> sensors = sensorRepository.findAll();
             List<SensorDTO> sensorDTOList = new ArrayList<>();
             String ubicacion = "";
+            System.out.println("Sensores encontrados: " + sensors.size());
             for(Sensor sensor : sensors){
                 SensorDTO sensorDTO = new SensorDTO();
                 sensorDTO.setId(sensor.getId());
@@ -51,9 +53,11 @@ public class SensorServiceImpl implements SensorService {
                 sensorDTO.setNombre(sensor.getNombre());
                 sensorDTO.setDescripcion(sensor.getDescripcion());
                 sensorDTO.setConfig(sensor.isConfig());
-                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
-                ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
-                sensorDTO.setUbicacion(ubicacion);
+                if (sensor.getIdEstacion() != null) {
+                    Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
+                    ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                    sensorDTO.setUbicacion(ubicacion);
+                }
                 sensorDTOList.add(sensorDTO);
             }
 
@@ -84,10 +88,11 @@ public class SensorServiceImpl implements SensorService {
             sensorDTO.setNombre(sensor.get().getNombre());
             sensorDTO.setDescripcion(sensor.get().getDescripcion());
             sensorDTO.setConfig(sensor.get().isConfig());
-            Optional<Estacion> estacion = estacionRepository.findById(sensor.get().getIdEstacion());
-            String ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
-            sensorDTO.setUbicacion(ubicacion);
-
+            if (sensor.get().getIdEstacion() == null) {
+                Optional<Estacion> estacion = estacionRepository.findById(sensor.get().getIdEstacion());
+                String ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                sensorDTO.setUbicacion(ubicacion);
+            }
             return ResponseEntity.ok(sensorDTO);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -165,9 +170,11 @@ public class SensorServiceImpl implements SensorService {
                 sensorDTO.setNombre(sensor.getNombre());
                 sensorDTO.setDescripcion(sensor.getDescripcion());
                 sensorDTO.setConfig(sensor.isConfig());
-                Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
-                ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
-                sensorDTO.setUbicacion(ubicacion);
+                if (sensor.getIdEstacion() != null) {
+                    Optional<Estacion> estacion = estacionRepository.findById(sensor.getIdEstacion());
+                    ubicacion = estacion.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                    sensorDTO.setUbicacion(ubicacion);
+                }
                 sensorDTOList.add(sensorDTO);
             }
             return ResponseEntity.ok(sensorDTOList);
@@ -198,9 +205,11 @@ public class SensorServiceImpl implements SensorService {
                     sensorDTO.setNombre(sensor.getNombre());
                     sensorDTO.setDescripcion(sensor.getDescripcion());
                     sensorDTO.setConfig(sensor.isConfig());
-                    Optional<Estacion> estacion1 = estacionRepository.findById(sensor.getIdEstacion());
-                    ubicacion = estacion1.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
-                    sensorDTO.setUbicacion(ubicacion);
+                    if (sensor.getIdEstacion() != null) {
+                        Optional<Estacion> estacion1 = estacionRepository.findById(sensor.getIdEstacion());
+                        ubicacion = estacion1.map(value -> value.getCiudad() + " - " + value.getDepartamento()).orElse("No se encontro la ubicacion");
+                        sensorDTO.setUbicacion(ubicacion);
+                    }
                     sensorDTOList.add(sensorDTO);
                 }
             }
