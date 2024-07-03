@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import iser.apiOrion.DTO.DatosDTO;
+import iser.apiOrion.DTO.DatosGraficaDTO;
 import iser.apiOrion.collection.Datos;
 import iser.apiOrion.service.DatosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class DatosController {
 
             @ApiResponse(responseCode = "200", description = "operacion exitosa",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Datos.class)))}),
+                            array = @ArraySchema(schema = @Schema(implementation = DatosGraficaDTO.class)))}),
             @ApiResponse(responseCode = "400", description = "peticion fallida", content = { @io.swagger.v3.oas.annotations.media.Content (mediaType = "application/json",
                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })

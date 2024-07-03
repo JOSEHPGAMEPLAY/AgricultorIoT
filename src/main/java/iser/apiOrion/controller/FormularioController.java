@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import iser.apiOrion.DTO.FormularioDTO;
 import iser.apiOrion.collection.Formulario;
 import iser.apiOrion.collection.Usuario;
 import iser.apiOrion.service.FormularioService;
@@ -110,8 +111,8 @@ public class FormularioController {
                         examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\":\"peticion fallida\"}"))}),
     })
     @PostMapping("/aceptarUsuario")
-    public ResponseEntity<?> aceptarUsuario(@RequestBody String idFormulario){
-        return formularioService.aceptarUsuario(idFormulario);
+    public ResponseEntity<?> aceptarUsuario(@RequestBody FormularioDTO formularioDTO){
+        return formularioService.aceptarUsuario(formularioDTO.getIdFormulario());
     }
 
 }

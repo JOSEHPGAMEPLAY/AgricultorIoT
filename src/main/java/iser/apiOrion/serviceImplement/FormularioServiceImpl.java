@@ -11,6 +11,7 @@ import iser.apiOrion.service.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -129,6 +130,7 @@ public class FormularioServiceImpl implements FormularioService {
      * @return ResponseEntity con el resultado de la operacion
      */
     @Override
+    @Transactional
     public ResponseEntity<?> aceptarUsuario(String idFormulario) {
         try {
             Optional<Formulario> formularioOptional = formularioRepository.findById(idFormulario);
@@ -145,6 +147,7 @@ public class FormularioServiceImpl implements FormularioService {
             usuario.setNombres(formulario.getNombres());
             usuario.setEmail(formulario.getEmail());
             Usuario usuarioGuardado = usuarioRepository.save(usuario);
+            formularioRepository.deleteById(idFormulario);
             emailService.sendMail(new String[]{usuario.getEmail()}, "Usuario Aceptado", usuarioAceptado());
             return ResponseEntity.ok(usuarioGuardado);
         } catch (Exception e) {
