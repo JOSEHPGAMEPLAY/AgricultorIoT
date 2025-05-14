@@ -1,7 +1,7 @@
 package iser.apiOrion.service;
 
 import iser.apiOrion.collection.TuyaSensorData;
-import iser.apiOrion.repository.TuyaSensorRepository;
+import iser.apiOrion.repository.TuyaSensorDataRepository; // Cambia el import
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class TuyaSensorService {
 
     @Autowired
-    private TuyaSensorRepository repository;
+    private TuyaSensorDataRepository repository; // Cambia el nombre aquí
 
     public ResponseEntity<?> guardarDatos(TuyaSensorData datos) {
         if (datos == null || (datos.getPh() == null && datos.getTemperatura() == null)) {
